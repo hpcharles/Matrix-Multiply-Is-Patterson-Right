@@ -10,8 +10,8 @@ all:
 
 int:
 	time ./MatrixMultiply.py ${SIZE} int
-	gcc ${CFLAGS} -g -o MatrixMultiply MatrixMultiply.c -DNLINE=${SIZE} -DNCOL=${SIZE} 
-	time ./MatrixMultiply
+#	gcc ${CFLAGS} -g -o MatrixMultiply MatrixMultiply.c -DNLINE=${SIZE} -DNCOL=${SIZE}
+#	time ./MatrixMultiply
 float:
 	time ./MatrixMultiply.py ${SIZE} float
 	gcc ${CFLAGS} -g -o MatrixMultiply MatrixMultiply.c -DNLINE=${SIZE} -DNCOL=${SIZE} -DTYPEELTFLT
