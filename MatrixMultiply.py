@@ -45,6 +45,7 @@ def standardMatrixProduct(A, B):
 
 if __name__ == "__main__":
     import sys
+# TODO iterate and do it many itterations
 
     (dimension, dataType) = parseUserInput()
     if dataType == "float":

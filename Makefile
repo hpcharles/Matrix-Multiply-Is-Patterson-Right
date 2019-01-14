@@ -1,23 +1,49 @@
 CC				= gcc
-SIZE			= 20
+SIZE			= 3
 NB_ITERATION	= 1000
-
-all: 
-	make int   SIZE=${SIZE} CFLAGS="-O0 -Wall"
-	make int   SIZE=${SIZE} CFLAGS="-O3 -Wall"
-	make float SIZE=${SIZE} CFLAGS="-O0 -Wall"
-	make float SIZE=${SIZE} CFLAGS="-O3 -Wall"
+DIM_PROPERTY	= -DNLINE=${SIZE} -DNCOL=${SIZE}
 
 
-int:
-	time ./MatrixMultiply.py ${SIZE} int
-	${CC} ${CFLAGS} -g -DNLINE=${SIZE} -DNCOL=${SIZE} -DNB_ITERATION=${NB_ITERATION}				-o MatrixMultiply MatrixMultiply.c 
-	time ./MatrixMultiply
-float:
-	time ./MatrixMultiply.py ${SIZE} float
-	${CC} ${CFLAGS} -g -DNLINE=${SIZE} -DNCOL=${SIZE} -DNB_ITERATION=${NB_ITERATION} -DTYPEELTFLT	-o MatrixMultiply MatrixMultiply.c
-	time ./MatrixMultiply
-clean:
-	rm MatrixMultiply
-%.o	%.c
-	${CC} ${CFLAGS} -g -c -o $@ $^
+
+all			:
+			make int   SIZE=${SIZE} CFLAGS="-O0 -Wall"
+			make int   SIZE=${SIZE} CFLAGS="-O3 -Wall"
+			make float SIZE=${SIZE} CFLAGS="-O0 -Wall"
+			make float SIZE=${SIZE} CFLAGS="-O3 -Wall"
+
+
+int			: MatrixMultiply.o_int MatrixMultiplyNaive.o_int util.o_int perfMeasurement.o
+			$(call compileAndExecuteAll,int)
+
+float		: MatrixMultiply.o_float MatrixMultiplyNaive.o_float util.o_float perfMeasurement.o
+			$(call compileAndExecuteAll,float)
+
+
+clean		:
+			rm MatrixMultiply_int MatrixMultiply_float *.o*
+
+
+#------------------------------------------
+# Generic compilation
+#------------------------------------------
+%.o			: %.c
+			${CC} ${CFLAGS} ${DIM_PROPERTY}						-g -c -o $@ $^
+
+
+%.o_int		: %.c
+			${CC} ${CFLAGS} ${DIM_PROPERTY} -DDATA_TYPE=int		-g -c -o $@ $^
+
+
+%.o_float	: %.c
+			${CC} ${CFLAGS} ${DIM_PROPERTY} -DDATA_TYPE=float	-g -c -o $@ $^
+
+
+#------------------------------------------
+# Compile and execute all the tests
+#------------------------------------------
+# The first parameter is the data type
+define compileAndExecuteAll
+			time ./MatrixMultiply.py ${SIZE} ${1}
+			${CC} ${CFLAGS}	${DIM_PROPERTY} -o MatrixMultiply_${1} MatrixMultiply.o_${1} MatrixMultiplyNaive.o_${1} util.o_${1} perfMeasurement.o
+			time ./MatrixMultiply_${1} --logger + --nbIteration ${NB_ITERATION}
+endef
