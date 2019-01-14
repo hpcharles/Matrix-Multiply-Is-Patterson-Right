@@ -131,11 +131,11 @@ int main(int argc, char * argv[])
 	randMatrix(a);  randMatrix(b);
 	time = 0;
 	ticktime = getticks();
-	for (i = 0; i< 1000; i++)
+	for (i = 0; i< NB_ITERATION; i++)
 		time += mulMatrix(a, b, c);
 	ticktime = getticks() - ticktime;
-	printf ("usec  & ticks time of 1000 iteration : %10lld %10lld\n", time, ticktime);
-	printf ("usec  & ticks time of 1 iteration : %10lld %10lld\n", time/1000, ticktime/1000);
+	printf ("usec  & ticks time of %-5d iterations: %10lld %10lld\n", NB_ITERATION, time,				ticktime);
+	printf ("usec  & ticks time of %-5d iteration : %10lld %10lld\n", 1,			time/NB_ITERATION,	ticktime/NB_ITERATION);
 #if 0
 	printMatrix (c);
 #endif
