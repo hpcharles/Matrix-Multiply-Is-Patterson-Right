@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
+#include <stdint.h>
+#include <inttypes.h>
+
 
 
 
@@ -9,6 +12,8 @@
 #define LOGGER_FLAG_ALL							'+'				/** <User input flag to print the content of all the modules  */
 #define LOGGER_FLAG_MAIN						'm'				/** <User input flag to print the content of the module main.cc  */
 #define LOGGER_FLAG_PRINT_RESULT				'p'				/** <User input flag to print the result matrix  */
+#define LOGGER_FLAG_COMPUTATION					'c'				/** <User input flag to print the computations*/
+#define LOGGER_FLAG_UTIL						'u'				/** <User input flag to print the util functions*/
 
 #define PARAMETER_LOGGER_FLAG					"--logger"
 #define PARAMETER_PRINT_HELP					"--help"
@@ -16,6 +21,7 @@
 
 #define DEFAULT_LOGGER_FLAG						'+'
 #define DEFAULT_NB_ITERATION					10
+#define LOGGER_HEADER							"\t>>>>>"
 
 /**
  * \brief Matrix definition
@@ -29,9 +35,9 @@ typedef DATA_TYPE tMatrix[NLINE][NCOL];
 #define MACROS_VALUE_STRING(s)		str(s)
 #define str(s)						#s
 #define PRINT_FORMAT				(!strcmp("float",	MACROS_VALUE_STRING(DATA_TYPE)))	?	\
-										"%08f "												:	\
+										"%10f "												:	\
 									(!strcmp("int",		MACROS_VALUE_STRING(DATA_TYPE)))	?	\
-										"%08d "												:	\
+										"%10d "												:	\
 										LOGGER_error(1, "Data type not handled: \"%s\"", MACROS_VALUE_STRING(DATA_TYPE))
 
 
@@ -56,7 +62,19 @@ int LOGGER_IsEnabled (char flag);
  * \param flag		: flag corresponding to the type of message to print. If flag is NULL, then we force the print.
  * \param format	: equivalent to printf format
  */
-void LOGGER(char flag, const char *format, ...);
+#ifndef DEBUG_LOGGER
+	#define LOGGER(...)		((void)0)
+#else
+	#define LOGGER			myPrint
+#endif
+
+
+/**
+ * \brief LOGGER: Prints a message, if flag is enabled (equivalent to printf) and debug flag is set
+ * \param flag		: flag corresponding to the type of message to print. If flag is NULL, then we force the print.
+ * \param format	: equivalent to printf format
+ */
+void myPrint(char flag, const char *format, ...);
 
 
 /**

@@ -28,12 +28,13 @@ int LOGGER_IsEnabled (char flag)
 }
 
 
-void LOGGER(char flag, const char *format, ...)
+void myPrint(char flag, const char *format, ...)
 {
 	if ((flag == LOGGER_FLAG_ALL) || (LOGGER_IsEnabled (flag)))
 	{
 		va_list ap;
 		va_start (ap, format);
+		fprintf(stdout, LOGGER_HEADER);
 		vfprintf (stdout, format, ap);
 		va_end (ap);
 		fflush (stdout);
@@ -117,11 +118,17 @@ void printHelp(char exit_b)
 void printMatrix(tMatrix a)
 {
 	int line, col;
+	char buffer[NCOL * 50], *bufferTmp;
+
+	LOGGER(LOGGER_FLAG_UTIL, "Print the matrix %p of size: %d line and %d column\n", (DATA_TYPE**)a, NLINE, NCOL);
 	for (line = 0; line < NLINE; line++)
 	{
+		bufferTmp = buffer;
 		for (col = 0; col < NCOL; col++)
-			LOGGER(LOGGER_FLAG_PRINT_RESULT, PRINT_FORMAT, a[line][col]);
-		LOGGER(LOGGER_FLAG_PRINT_RESULT, "\n");
+		{
+			bufferTmp += sprintf(bufferTmp, PRINT_FORMAT, a[line][col]);
+		}
+		LOGGER(LOGGER_FLAG_PRINT_RESULT, "%s\n", buffer);
 	}
 	LOGGER(LOGGER_FLAG_PRINT_RESULT, "\n");
 }
@@ -130,6 +137,8 @@ void printMatrix(tMatrix a)
 void cleanMatrix(tMatrix a)
 {
 	int line, col;
+
+	LOGGER(LOGGER_FLAG_UTIL, "Clean the matrix %p of size: %d line and %d column\n", (DATA_TYPE**)a, NLINE, NCOL);
 	for (line = 0; line < NLINE; line++)
 		for (col = 0; col < NCOL; col++)
 			a[line][col] = 0;
@@ -139,6 +148,8 @@ void cleanMatrix(tMatrix a)
 void randMatrix(tMatrix a)
 {
 	int line, col;
+
+	LOGGER(LOGGER_FLAG_UTIL, "Random-fill the matrix %p of size: %d line and %d column\n", (DATA_TYPE**)a, NLINE, NCOL);
 	for (line = 0; line < NLINE; line++)
 		for (col = 0; col < NCOL; col++)
 			a[line][col] = (DATA_TYPE) (rand () % 1000);

@@ -28,6 +28,8 @@ int main(int argc, char * argv[])
 
 	cleanMatrix(a);  cleanMatrix(b);   cleanMatrix(c);
 	randMatrix(a);  randMatrix(b);
+	printMatrix (a);
+	printMatrix (b);
 
 	time = 0;
 	ticktime = getticks();
