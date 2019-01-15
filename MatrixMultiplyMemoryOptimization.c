@@ -9,7 +9,7 @@ void sumMatrix(tMatrix a, tMatrix b, tMatrix res)
 
 }
 
-long long mulMatrix(tMatrix a, tMatrix b, tMatrix res)
+void mulMatrix(tMatrix a, tMatrix b, tMatrix res)
 {
 
 }

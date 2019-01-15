@@ -1,26 +1,28 @@
 CC				= gcc
+CFLAGS			= -Wall -g -Werror
 SIZE			= 3
 NB_ITERATION	= 1000
 DIM_PROPERTY	= -DNLINE=${SIZE} -DNCOL=${SIZE}
 
 
 
+
 all			:
-			make int   SIZE=${SIZE} CFLAGS="-O0 -Wall"
-			make int   SIZE=${SIZE} CFLAGS="-O3 -Wall"
-			make float SIZE=${SIZE} CFLAGS="-O0 -Wall"
-			make float SIZE=${SIZE} CFLAGS="-O3 -Wall"
+			make int   SIZE=${SIZE} CFLAGS_OPT="-O0"
+			make int   SIZE=${SIZE} CFLAGS_OPT="-O3"
+			make float SIZE=${SIZE} CFLAGS_OPT="-O0"
+			make float SIZE=${SIZE} CFLAGS_OPT="-O3"
 
 
-int			: MatrixMultiply.o_int MatrixMultiplyNaive.o_int util.o_int perfMeasurement.o
+int			: clean MatrixMultiply.o_int MatrixMultiplyNaive.o_int MatrixMultiplySIMD.o_int util.o_int perfMeasurement.o
 			$(call compileAndExecuteAll,int)
 
-float		: MatrixMultiply.o_float MatrixMultiplyNaive.o_float util.o_float perfMeasurement.o
+float		: clean MatrixMultiply.o_float MatrixMultiplyNaive.o_float util.o_float perfMeasurement.o
 			$(call compileAndExecuteAll,float)
 
 
 clean		:
-			rm MatrixMultiply_int MatrixMultiply_float *.o*
+			rm -f MatrixMultiply_int MatrixMultiply_float *.o*
 
 
 #------------------------------------------
@@ -44,6 +46,8 @@ clean		:
 # The first parameter is the data type
 define compileAndExecuteAll
 			time ./MatrixMultiply.py ${SIZE} ${1}
-			${CC} ${CFLAGS}	${DIM_PROPERTY} -o MatrixMultiply_${1} MatrixMultiply.o_${1} MatrixMultiplyNaive.o_${1} util.o_${1} perfMeasurement.o
+			${CC} ${CFLAGS}	${CFLAGS_OPT} ${DIM_PROPERTY} -o MatrixMultiply_${1} MatrixMultiply.o_${1} MatrixMultiplyNaive.o_${1} util.o_${1} perfMeasurement.o
+			time ./MatrixMultiply_${1} --logger + --nbIteration ${NB_ITERATION}
+			${CC} ${CFLAGS}	${CFLAGS_OPT} ${DIM_PROPERTY} -o MatrixMultiply_${1} MatrixMultiply.o_${1} MatrixMultiplySIMD.o_${1} util.o_${1} perfMeasurement.o
 			time ./MatrixMultiply_${1} --logger + --nbIteration ${NB_ITERATION}
 endef

@@ -12,10 +12,9 @@ void sumMatrix(tMatrix a, tMatrix b, tMatrix res)
 			res[line][col] = a[line][col] + b[line][col];
 }
 
-long long mulMatrix(tMatrix a, tMatrix b, tMatrix res)
+void mulMatrix(tMatrix a, tMatrix b, tMatrix res)
 {
 	int line, col, k;
-	long long timeusec = start();
 	for (line = 0; line < NLINE; line++)
 		for (col = 0; col < NCOL; col++)
 		{
@@ -23,7 +22,6 @@ long long mulMatrix(tMatrix a, tMatrix b, tMatrix res)
 			for (k = 0; k < NCOL; k++)
 				res[line][col] += a[line][k] * b[k][col];
 		}
-	return stop(timeusec);
 }
 
 void diagMatrix(tMatrix a, DATA_TYPE value)
