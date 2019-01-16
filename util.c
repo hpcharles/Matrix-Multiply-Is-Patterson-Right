@@ -3,6 +3,8 @@
 
 
 
+
+
 // -----------------------------
 // Global parameters
 // -----------------------------
@@ -113,45 +115,3 @@ void printHelp(char exit_b)
 	if (exit_b)
 		exit(2);
 }
-
-
-void printMatrix(tMatrix a)
-{
-	int line, col;
-	char buffer[NCOL * 50], *bufferTmp;
-
-	LOGGER(LOGGER_FLAG_UTIL, "Print the matrix %p of size: %d line and %d column\n", (DATA_TYPE**)a, NLINE, NCOL);
-	for (line = 0; line < NLINE; line++)
-	{
-		bufferTmp = buffer;
-		for (col = 0; col < NCOL; col++)
-		{
-			bufferTmp += sprintf(bufferTmp, PRINT_FORMAT, a[line][col]);
-		}
-		LOGGER(LOGGER_FLAG_PRINT_RESULT, "%s\n", buffer);
-	}
-	LOGGER(LOGGER_FLAG_PRINT_RESULT, "\n");
-}
-
-
-void cleanMatrix(tMatrix a)
-{
-	int line, col;
-
-	LOGGER(LOGGER_FLAG_UTIL, "Clean the matrix %p of size: %d line and %d column\n", (DATA_TYPE**)a, NLINE, NCOL);
-	for (line = 0; line < NLINE; line++)
-		for (col = 0; col < NCOL; col++)
-			a[line][col] = 0;
-}
-
-
-void randMatrix(tMatrix a)
-{
-	int line, col;
-
-	LOGGER(LOGGER_FLAG_UTIL, "Random-fill the matrix %p of size: %d line and %d column\n", (DATA_TYPE**)a, NLINE, NCOL);
-	for (line = 0; line < NLINE; line++)
-		for (col = 0; col < NCOL; col++)
-			a[line][col] = (DATA_TYPE) (rand () % 1000);
-}
-

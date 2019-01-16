@@ -1,9 +1,14 @@
+#ifndef _UTIL_H
+#define _UTIL_H
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
 #include <stdint.h>
 #include <inttypes.h>
+#include <float.h>
 
 
 
@@ -11,7 +16,8 @@
 
 #define LOGGER_FLAG_ALL							'+'				/** <User input flag to print the content of all the modules  */
 #define LOGGER_FLAG_MAIN						'm'				/** <User input flag to print the content of the module main.cc  */
-#define LOGGER_FLAG_PRINT_RESULT				'p'				/** <User input flag to print the result matrix  */
+#define LOGGER_FLAG_TIME						't'				/** <User input flag to print the time of execution*/
+#define LOGGER_FLAG_RESULT						'p'				/** <User input flag to print the result matrix  */
 #define LOGGER_FLAG_COMPUTATION					'c'				/** <User input flag to print the computations*/
 #define LOGGER_FLAG_UTIL						'u'				/** <User input flag to print the util functions*/
 
@@ -24,20 +30,14 @@
 #define LOGGER_HEADER							"\t>>>>>"
 
 /**
- * \brief Matrix definition
- */
-typedef DATA_TYPE tMatrix[NLINE][NCOL];
-
-
-/**
  * \brief Returns a constant string containing the value of the input macros
  */
 #define MACROS_VALUE_STRING(s)		str(s)
 #define str(s)						#s
 #define PRINT_FORMAT				(!strcmp("float",	MACROS_VALUE_STRING(DATA_TYPE)))	?	\
-										"%10f "												:	\
+										"%15f "												:	\
 									(!strcmp("int",		MACROS_VALUE_STRING(DATA_TYPE)))	?	\
-										"%10d "												:	\
+										"%15d "												:	\
 										LOGGER_error(1, "Data type not handled: \"%s\"", MACROS_VALUE_STRING(DATA_TYPE))
 
 
@@ -114,7 +114,4 @@ void printHelp(char exit_b);
 		abort();					\
 	}
 
-
-void printMatrix(tMatrix a);
-void cleanMatrix(tMatrix a);
-void randMatrix(tMatrix a);
+#endif

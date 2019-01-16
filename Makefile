@@ -1,47 +1,72 @@
-CC				= gcc
-CFLAGS			= -Wall -g -Werror -DDEBUG_LOGGER
-SIZE			= 4
-NB_ITERATION	= 1 #1000
-DIM_PROPERTY	= -DNLINE=${SIZE} -DNCOL=${SIZE}
+CC					= gcc
+CFLAGS				= -Wall -g -Werror -DDEBUG_LOGGER -DCHECK_RESULT
+SIZE				= 100
+NB_ITERATION		= 1000
+DIM_PROPERTY		= -DNLINE=${SIZE} -DNCOL=${SIZE}
+EXECUTION_PARAMETER	= --logger t --nbIteration ${NB_ITERATION}
 
 
 
-
-all			:
-			make int   SIZE=${SIZE} CFLAGS_OPT="-O0"
-			make int   SIZE=${SIZE} CFLAGS_OPT="-O3"
-			make float SIZE=${SIZE} CFLAGS_OPT="-O0"
-			make float SIZE=${SIZE} CFLAGS_OPT="-O3"
-
-
-int			: clean MatrixMultiply.o_int	MatrixMultiplyNaive.o_int	MatrixMultiplySIMD.o_int	util.o_int		perfMeasurement.o
-#			$(call compileAndExecutePython,int)
-			$(call compileAndExecuteNaive,int)
-#			$(call compileAndExecuteSIMD,int)
-
-float		: clean MatrixMultiply.o_float	MatrixMultiplyNaive.o_float	MatrixMultiplySIMD.o_float	util.o_float	perfMeasurement.o
-#			$(call compileAndExecutePython,float)
-#			$(call compileAndExecuteNaive,float)
-			$(call compileAndExecuteSIMD,float)
+all						:
+						make int   SIZE=${SIZE} CFLAGS_OPT="-O0"
+						make int   SIZE=${SIZE} CFLAGS_OPT="-O3"
+						make float SIZE=${SIZE} CFLAGS_OPT="-O0"
+						make float SIZE=${SIZE} CFLAGS_OPT="-O3"
 
 
-clean		:
-			rm -f MatrixMultiply_int MatrixMultiply_float *.o*
+int						:	clean perfMeasurement.o																\
+							util.o_int																			\
+							matrixMultiply.o_int_naive		matrix.o_int_naive		matrix_naive.o_int_naive	\
+							matrixMultiply.o_int_SIMD		matrix.o_int_SIMD		matrix_SIMD.o_int_SIMD
+						$(call compileAndExecutePython,int)
+						$(call compileAndExecuteNaive,int)
+						$(call compileAndExecuteSIMD,int)
+
+
+float					:	clean perfMeasurement.o																	\
+							util.o_float																			\
+							matrixMultiply.o_float_naive	matrix.o_float_naive	matrix_naive.o_float_naive		\
+							matrixMultiply.o_float_SIMD		matrix.o_float_SIMD		matrix_SIMD.o_float_SIMD
+#						$(call compileAndExecutePython,float)
+						$(call compileAndExecuteNaive,float)
+#						$(call compileAndExecuteSIMD,float)
+
+
+clean					:
+						rm -f MatrixMultiply_int MatrixMultiply_float *.o*
 
 
 #------------------------------------------
 # Generic compilation
 #------------------------------------------
-%.o			: %.c
-			${CC} ${CFLAGS} ${DIM_PROPERTY}						-g -c -o $@ $^
+%.o						: %.c
+						${CC} ${CFLAGS} ${DIM_PROPERTY}												-g -c -o $@ $^
+
+#------
+%.o_int					: %.c
+						${CC} ${CFLAGS} ${DIM_PROPERTY} -DDATA_TYPE=int								-g -c -o $@ $^
 
 
-%.o_int		: %.c
-			${CC} ${CFLAGS} ${DIM_PROPERTY} -DDATA_TYPE=int		-g -c -o $@ $^
+%.o_float				: %.c
+						${CC} ${CFLAGS} ${DIM_PROPERTY} -DDATA_TYPE=float							-g -c -o $@ $^
 
 
-%.o_float	: %.c
-			${CC} ${CFLAGS} ${DIM_PROPERTY} -DDATA_TYPE=float	-g -c -o $@ $^
+#------
+%.o_int_naive			: %.c
+						${CC} ${CFLAGS} ${DIM_PROPERTY} -DDATA_TYPE=int		-DMATRIX_SIMPLE_STATIC	-g -c -o $@ $^
+
+
+%.o_int_SIMD			: %.c
+						${CC} ${CFLAGS} ${DIM_PROPERTY} -DDATA_TYPE=int		-DMATRIX_SIMPLE_STATIC	-g -c -o $@ $^
+
+
+#------
+%.o_float_naive			: %.c
+						${CC} ${CFLAGS} ${DIM_PROPERTY} -DDATA_TYPE=float	-DMATRIX_SIMPLE_STATIC	-g -c -o $@ $^
+
+
+%.o_float_SIMD			: %.c
+						${CC} ${CFLAGS} ${DIM_PROPERTY} -DDATA_TYPE=float	-DMATRIX_SIMPLE_STATIC	-g -c -o $@ $^
 
 
 #------------------------------------------
@@ -49,17 +74,31 @@ clean		:
 # The first parameter is the data type
 #------------------------------------------
 define compileAndExecutePython
-#			time ./MatrixMultiply.py ${SIZE} ${1}
+			$(call writeExecHeader, python)
+			time ./MatrixMultiply.py ${SIZE} ${1}
 endef
 
 
 define compileAndExecuteNaive
-			${CC} ${CFLAGS}	${CFLAGS_OPT} ${DIM_PROPERTY} -o MatrixMultiply_${1} MatrixMultiply.o_${1} MatrixMultiplyNaive.o_${1} util.o_${1} perfMeasurement.o
-			time ./MatrixMultiply_${1} --logger + --nbIteration ${NB_ITERATION}
+			${CC} ${CFLAGS}	${CFLAGS_OPT} ${DIM_PROPERTY} -o matrixMultiply_${1}_naive	matrixMultiply.o_${1}_naive	matrix.o_${1}_naive matrix_naive.o_${1}_naive	util.o_${1} perfMeasurement.o
+			$(call writeExecHeader, "naive C")
+			./matrixMultiply_${1}_naive ${EXECUTION_PARAMETER}
 endef
 
 
 define compileAndExecuteSIMD
-			${CC} ${CFLAGS}	${CFLAGS_OPT} ${DIM_PROPERTY} -o MatrixMultiply_${1} MatrixMultiply.o_${1} MatrixMultiplySIMD.o_${1} util.o_${1} perfMeasurement.o
-			time ./MatrixMultiply_${1} --logger + --nbIteration ${NB_ITERATION}
+			${CC} ${CFLAGS}	${CFLAGS_OPT} ${DIM_PROPERTY} -o matrixMultiply_${1}_SIMD	matrixMultiply.o_${1}_SIMD matrix.o_${1}_SIMD	matrix_SIMD.o_${1}_SIMD		util.o_${1} perfMeasurement.o
+			$(call writeExecHeader, "SIMD")
+			./MatrixMultiply_${1}_SIMD ${EXECUTION_PARAMETER}
+endef
+
+
+#------------------------------------------
+# Auxiliary functions
+#------------------------------------------
+define writeExecHeader
+	echo
+	echo "----------------------------------"
+	echo "Execution of "${1} " version"
+	echo "----------------------------------"
 endef

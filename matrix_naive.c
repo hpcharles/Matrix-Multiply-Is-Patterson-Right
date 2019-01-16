@@ -1,10 +1,10 @@
-#include "MatrixMultiply.h"
+#include "matrix.h"
 
 
 
 
 
-void sumMatrix(tMatrix a, tMatrix b, tMatrix res)
+void sumMatrix(tMatrix_a a, tMatrix_b b, tMatrix_res res)
 {
 	int line, col;
 	for (line = 0; line < NLINE; line++)
@@ -12,7 +12,7 @@ void sumMatrix(tMatrix a, tMatrix b, tMatrix res)
 			res[line][col] = a[line][col] + b[line][col];
 }
 
-void mulMatrix(tMatrix a, tMatrix b, tMatrix res)
+void mulMatrix(tMatrix_a a, tMatrix_b b, tMatrix_res res)
 {
 	int line, col, k;
 
@@ -26,7 +26,7 @@ void mulMatrix(tMatrix a, tMatrix b, tMatrix res)
 		}
 }
 
-void diagMatrix(tMatrix a, DATA_TYPE value)
+void diagMatrix(tMatrix_a a, DATA_TYPE value)
 {
 	int indice, line;
 	indice = (NLINE < NCOL)?NLINE:NCOL;
@@ -34,14 +34,14 @@ void diagMatrix(tMatrix a, DATA_TYPE value)
 		a[line][line] = value;
 }
 
-void firstLineMatrix(tMatrix a, DATA_TYPE value)
+void firstLineMatrix(tMatrix_a a, DATA_TYPE value)
 {
 	int col;
 	for (col = 0; col < NCOL; col++)
 		a[0][col] = value;
 }
 
-void firstColMatrix(tMatrix a, DATA_TYPE value)
+void firstColMatrix(tMatrix_a a, DATA_TYPE value)
 {
 	int line;
 	for (line = 0; line < NCOL; line++)
