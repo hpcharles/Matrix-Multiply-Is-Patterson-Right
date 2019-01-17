@@ -12,6 +12,8 @@
 
 
 
+#define VECTOR_SIZE		16	// Size of the vector-register in bytes (TODO: change with the default Intel macros)
+
 
 
 #define LOGGER_FLAG_ALL							'+'				/** <User input flag to print the content of all the modules  */
