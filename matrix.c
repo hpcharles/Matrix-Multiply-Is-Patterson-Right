@@ -68,5 +68,6 @@ void randMatrix(void *M, int TYPE)
 	LOGGER(LOGGER_FLAG_UTIL, "Random-fill the matrix %p of size: %d line and %d column\n", (DATA_TYPE**)M, NLINE, NCOL);
 	for (line = 0; line < NLINE; line++)
 		for (col = 0; col < NCOL; col++)
-			SET_MATRIX_GENERIC(M, line, col, (DATA_TYPE) (rand () % 1000), TYPE);
+			SET_MATRIX_GENERIC(M, line, col, (DATA_TYPE) 100, TYPE);
+//			SET_MATRIX_GENERIC(M, line, col, (DATA_TYPE) (rand () % 1000), TYPE);
 }

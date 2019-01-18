@@ -16,7 +16,7 @@ void mulMatrix(tMatrix_a a, tMatrix_b b, tMatrix_res res)
 {
 	int line, col, k;
 
-	LOGGER(LOGGER_FLAG_UTIL, "Multiply %s matrixes(%d line, %d column) with naive algo\n", MACROS_VALUE_STRING(DATA_TYPE), NLINE, NCOL);
+	LOGGER(LOGGER_FLAG_UTIL, "Multiply %s matrices(%d line, %d column) with naive algo\n", MACROS_VALUE_STRING(DATA_TYPE), NLINE, NCOL);
 	for (line = 0; line < NLINE; line++)
 		for (col = 0; col < NCOL; col++)
 		{

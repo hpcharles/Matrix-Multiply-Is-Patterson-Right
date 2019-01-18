@@ -1,4 +1,4 @@
-#include <xmmintrin.h>
+#include <pmmintrin.h>
 
 #include "matrix.h"
 
@@ -26,7 +26,7 @@ void mulMatrix(tMatrix_a a, tMatrix_b b, tMatrix_res res)
 	unsigned int vectorSIze_elem = VECTOR_SIZE / sizeof(DATA_TYPE);		// Number of elements in a vector
 	unsigned int nbrBlockColumn = (int)(NCOL / vectorSIze_elem) * vectorSIze_elem;
 
-	LOGGER(LOGGER_FLAG_UTIL, "Multiply %s matrixes(%d line, %d column) with SIMD vectors of size %d elements\n", MACROS_VALUE_STRING(DATA_TYPE), NLINE, NCOL, vectorSIze_elem);
+	LOGGER(LOGGER_FLAG_UTIL, "Multiply %s matrices(%d line, %d column) with SIMD vectors of size %d elements\n", MACROS_VALUE_STRING(DATA_TYPE), NLINE, NCOL, vectorSIze_elem);
 
 	for (line = 0; line < NLINE; line++)
 	{

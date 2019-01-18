@@ -16,6 +16,9 @@
 //#define DATA_TYPE	float
 //#define NLINE		10
 //#define NCOL		10
+
+
+
 /**
  * \brief Matrix definition
  */

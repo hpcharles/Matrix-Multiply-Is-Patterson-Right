@@ -11,6 +11,7 @@
 
 #include <pmmintrin.h>
 
+
 /**
  * \returns the sum of the 4 floats contained within the input vector
  */

@@ -10,6 +10,7 @@
 
 
 
+
 __inline__ float addElemSimdVect(__m128 vect)
 {
 	__m128 res;
@@ -19,5 +20,3 @@ __inline__ float addElemSimdVect(__m128 vect)
 
 	return res[3];
 }
-
-

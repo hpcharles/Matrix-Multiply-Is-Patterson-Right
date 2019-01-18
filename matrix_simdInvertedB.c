@@ -23,11 +23,12 @@ void mulMatrix(tMatrix_a a, tMatrix_b b, tMatrix_res res)
 	unsigned int line, col, k;
 	DATA_TYPE *a_addr, *b_addr;
 	__m128 vectA, vectB, vectRes, vectMul;
+//	__m128i vectA, vectB, vectRes, vectMul;
 
 	unsigned int vectorSIze_elem = VECTOR_SIZE / sizeof(DATA_TYPE);		// Number of elements in a vector
 	unsigned int nbrBlockColumn = (int)(NCOL / vectorSIze_elem) * vectorSIze_elem;
 
-	LOGGER(LOGGER_FLAG_UTIL, "Multiply %s matrixes(%d line, %d column) with SIMD vectors of size %d elements\n", MACROS_VALUE_STRING(DATA_TYPE), NLINE, NCOL, vectorSIze_elem);
+	LOGGER(LOGGER_FLAG_UTIL, "Multiply %s matrices(%d line, %d column) with SIMD vectors of size %d elements (inverted 2nd matrix)\n", MACROS_VALUE_STRING(DATA_TYPE), NLINE, NCOL, vectorSIze_elem);
 
 	for (line = 0; line < NLINE; line++)
 	{
@@ -44,14 +45,17 @@ void mulMatrix(tMatrix_a a, tMatrix_b b, tMatrix_res res)
 				vectA	= _mm_loadu_ps	((float*)a_addr);
 				vectB	= _mm_loadu_ps	((float*)b_addr);
 
-				printf("A   = %5.0f, %5.0f, %5.0f, %5.0f\n", vectA[0], vectA[1], vectA[2], vectA[3]);
-				printf("B   = %5.0f, %5.0f, %5.0f, %5.0f\n", vectB[0], vectB[1], vectB[2], vectB[3]);
+//				vectA	= _mm_loadu_si	((__m128i*)a_addr);
+//				vectB	= _mm_loadu_si	((__m128i*)b_addr);
+
+//				printf("A   = %5f, %5f, %5f, %5f\n", vectA[0], vectA[1], vectA[2], vectA[3]);
+//				printf("B   = %5f, %5f, %5f, %5f\n", vectB[0], vectB[1], vectB[2], vectB[3]);
 
 				vectMul	= _mm_mul_ps	(vectA, vectB);
 				vectRes	= _mm_add_ps	(vectRes, vectMul);
 
-				printf("MUL = %5.0f, %5.0f, %5.0f, %5.0f\n", vectMul[0], vectMul[1], vectMul[2], vectMul[3]);
-				printf("RES = %5.0f, %5.0f, %5.0f, %5.0f\n", vectRes[0], vectRes[1], vectRes[2], vectRes[3]);
+//				printf("MUL = %5d, %5d, %5d, %5d\n", vectMul[0], vectMul[1], vectMul[2], vectMul[3]);
+//				printf("RES = %5d, %5d, %5d, %5d\n", vectRes[0], vectRes[1], vectRes[2], vectRes[3]);
 
 				a_addr		= a_addr	+ vectorSIze_elem;
 				b_addr		= b_addr	+ vectorSIze_elem;

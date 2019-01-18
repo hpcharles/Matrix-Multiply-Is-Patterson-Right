@@ -51,6 +51,7 @@ int main(int argc, char * argv[])
 	time		= 0;
 	ticktime	= getticks();
 
+printf("Call algo: nbIteration = %d\n", nbIteration);
 	for (i = 0; i< nbIteration; i++)
 	{
 		cleanMatrix(&c, MATRIX_RES);

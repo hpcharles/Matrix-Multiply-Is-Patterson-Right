@@ -76,6 +76,18 @@ void LOGGER_force(const char *format, ...)
 }
 
 
+size_t cacheL1_line_size_linux()
+{
+	return (size_t)sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
+}
+
+
+size_t cacheL1_size_linux()
+{
+	return (size_t)sysconf(_SC_LEVEL1_DCACHE_SIZE);
+}
+
+
 /**
  * \details Read the parameters from the command line and put them into the output parameters
  */

@@ -9,11 +9,12 @@
 #include <stdint.h>
 #include <inttypes.h>
 #include <float.h>
+#include <unistd.h>
 
 
 
-#define VECTOR_SIZE		16	// Size of the vector-register in bytes (TODO: change with the default Intel macros)
-
+#define VECTOR_SIZE						16	// Size of the vector-register in bytes (TODO: change with the default Intel macros)
+#define FILE_L1CACHE_LINE_SIZE_LINUX	"/sys/devices/system/cpu/cpu0/cache/index0/coherency_line_size"
 
 
 #define LOGGER_FLAG_ALL							'+'				/** <User input flag to print the content of all the modules  */
@@ -28,7 +29,7 @@
 #define PARAMETER_NB_ITERATION					"--nbIteration"
 
 #define DEFAULT_LOGGER_FLAG						'+'
-#define DEFAULT_NB_ITERATION					10
+#define DEFAULT_NB_ITERATION					1
 #define LOGGER_HEADER							"\t>>>>>"
 
 /**
@@ -91,6 +92,22 @@ const char* LOGGER_error(int exit_b, const char *format, ...);
  * \param format	: equivalent to printf format
  */
 void LOGGER_force(const char *format, ...);
+
+
+
+
+/**
+ * \brief Retrieves the size of the L1 cache line (in Bytes)
+ * \warning this function uses the sysconf UNIX-specific API.
+ */
+size_t cacheL1_line_size_linux();
+
+
+/**
+ * \brief Retrieves the size of the L1 cache line (in Bytes)
+ * \warning this function uses the sysconf UNIX-specific API.
+ */
+size_t cacheL1_size_linux();
 
 
 /**
