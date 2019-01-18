@@ -32,30 +32,18 @@ void mulMatrix(tMatrix_a a, tMatrix_b b, tMatrix_res res)
 
 	for (line = 0; line < NLINE; line++)
 	{
-		printf("Line = %d\n", line);
 		for (col = 0; col < NCOL; col++)
 		{
-			printf("\tCol = %d\n", col);
 			a_addr	= a[line];
 			b_addr	= b[col];
 			vectRes	= _mm_setzero_ps();
 			for (k=0; k<nbrBlockColumn; k+=vectorSIze_elem)					// Compute the matrix that fits within the vectors
 			{
-				printf("\t\tk = %d\n", k);
 				vectA	= _mm_loadu_ps	((float*)a_addr);
 				vectB	= _mm_loadu_ps	((float*)b_addr);
 
-//				vectA	= _mm_loadu_si	((__m128i*)a_addr);
-//				vectB	= _mm_loadu_si	((__m128i*)b_addr);
-
-//				printf("A   = %5f, %5f, %5f, %5f\n", vectA[0], vectA[1], vectA[2], vectA[3]);
-//				printf("B   = %5f, %5f, %5f, %5f\n", vectB[0], vectB[1], vectB[2], vectB[3]);
-
 				vectMul	= _mm_mul_ps	(vectA, vectB);
 				vectRes	= _mm_add_ps	(vectRes, vectMul);
-
-//				printf("MUL = %5d, %5d, %5d, %5d\n", vectMul[0], vectMul[1], vectMul[2], vectMul[3]);
-//				printf("RES = %5d, %5d, %5d, %5d\n", vectRes[0], vectRes[1], vectRes[2], vectRes[3]);
 
 				a_addr		= a_addr	+ vectorSIze_elem;
 				b_addr		= b_addr	+ vectorSIze_elem;
@@ -71,42 +59,6 @@ void mulMatrix(tMatrix_a a, tMatrix_b b, tMatrix_res res)
 }
 
 
-
-
-
-
-
-
-
-/*
-
-			for (col = 0; col < NCOL; col++)
-		{
-			vectA	= _mm_set1_ps	((float)a[line][col]);
-			b_addr	= b[col];
-			res_addr= res[line];
-
-			for (k=0; k<nbrBlockColumn; k+=vectorSIze_elem)				// Compute the matrix that fits within the vectors
-			{
-				vectB	= _mm_loadu_ps	((float*)b_addr);
-				vectRes	= _mm_loadu_ps	((float*)res_addr);
-
-				vectMul	= _mm_mul_ps	(vectA, vectB);
-				vectRes	= _mm_add_ps	(vectRes, vectMul);
-
-				_mm_storeu_ps((float*)res_addr, vectRes);
-
-				b_addr		= b_addr	+ vectorSIze_elem;
-				res_addr	= res_addr	+ vectorSIze_elem;
-			}
-			for (k1=nbrBlockColumn; k1<NCOL; k1++)						// Compute the remaining cells of the matrix
-			{
-				res[line][k1] += a[line][col] * b[col][k1];
-			}
-		}
-	}
-}
-*/
 void diagMatrix(tMatrix_a a, DATA_TYPE value)
 {
 

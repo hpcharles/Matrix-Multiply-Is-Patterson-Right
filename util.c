@@ -91,7 +91,7 @@ size_t cacheL1_size_linux()
 /**
  * \details Read the parameters from the command line and put them into the output parameters
  */
-void extractParameter(int argc, char **argv, char * loggerFlag, unsigned int *nbIteration)
+void extractParameter(int argc, char **argv, char * loggerFlag, int *nbIteration)
 {
 	int i;
 

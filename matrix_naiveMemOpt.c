@@ -61,7 +61,6 @@ void mulMatrix(tMatrix_a a, tMatrix_b b, tMatrix_res res)
 			}
 		}
 	}
-//printf("AAAAAAAAAAAAAAAAAAAA\n");
 }
 
 

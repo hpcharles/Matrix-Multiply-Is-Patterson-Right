@@ -17,10 +17,9 @@
 int main(int argc, char * argv[])
 {
 	char loggerFlag[128];
-	unsigned int nbIteration;
+	int nbIteration, i;
 	long long time;
 	ticks ticktime;
-	int i;
 	tMatrix_a a;
 	tMatrix_b b;
 	tMatrix_res c;
@@ -31,28 +30,10 @@ int main(int argc, char * argv[])
 	cleanMatrix	(&a, MATRIX_A);	cleanMatrix	(&b, MATRIX_B);
 	randMatrix	(&a, MATRIX_A);	randMatrix	(&b, MATRIX_B);
 
-
-/*
-	b[0][0]	= 1;	b[1][0]	= 0;	b[2][0]	= 0;	b[3][0]	= 0;	b[4][0]	= 1;
-	b[0][1]	= 0;	b[1][1]	= 1;	b[2][1]	= 0;	b[3][1]	= 0;	b[4][1]	= 1;
-	b[0][2]	= 0;	b[1][2]	= 0;	b[2][2]	= 1;	b[3][2]	= 0;	b[4][2]	= 1;
-	b[0][3]	= 0;	b[1][3]	= 0;	b[2][3]	= 0;	b[3][3]	= 1;	b[4][3]	= 1;
-	b[0][4]	= 0;	b[1][4]	= 0;	b[2][4]	= 0;	b[3][4]	= 0;	b[4][4]	= 1;
-
-
-	SET_MATRIX_GENERIC(b, 0, 0, 0, MATRIX_B);	SET_MATRIX_GENERIC(b, 0, 1, 0, MATRIX_B);	SET_MATRIX_GENERIC(b, 0, 2, 0, MATRIX_B);	SET_MATRIX_GENERIC(b, 0, 3, 0, MATRIX_B);
-	SET_MATRIX_GENERIC(b, 1, 0, 0, MATRIX_B);	SET_MATRIX_GENERIC(b, 1, 1, 0, MATRIX_B);	SET_MATRIX_GENERIC(b, 1, 2, 0, MATRIX_B);	SET_MATRIX_GENERIC(b, 1, 3, 0, MATRIX_B);
-	SET_MATRIX_GENERIC(b, 2, 0, 0, MATRIX_B);	SET_MATRIX_GENERIC(b, 2, 1, 0, MATRIX_B);	SET_MATRIX_GENERIC(b, 2, 2, 0, MATRIX_B);	SET_MATRIX_GENERIC(b, 2, 3, 0, MATRIX_B);
-	SET_MATRIX_GENERIC(b, 3, 0, 0, MATRIX_B);	SET_MATRIX_GENERIC(b, 3, 1, 0, MATRIX_B);	SET_MATRIX_GENERIC(b, 3, 2, 0, MATRIX_B);	SET_MATRIX_GENERIC(b, 3, 3, 0, MATRIX_B);
-*/
-
-
-
 	time		= 0;
 	ticktime	= getticks();
 
-printf("Call algo: nbIteration = %d\n", nbIteration);
-	for (i = 0; i< nbIteration; i++)
+	for (i = 0; i< nbIteration; i+=1)
 	{
 		cleanMatrix(&c, MATRIX_RES);
 		long long timeusec_local = start();

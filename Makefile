@@ -6,7 +6,7 @@ CFLAGS_OPT			= -o0
 SIZE				= 4
 NB_ITERATION		= 1
 DIM_PROPERTY		= -DNLINE=${SIZE} -DNCOL=${SIZE}
-EXECUTION_PARAMETER	= --nbIteration ${NB_ITERATION} --logger t#p
+EXECUTION_PARAMETER	= --nbIteration ${NB_ITERATION} --logger tp
 
 EXEC				=	matrixMultiply_float_naive				\
 						matrixMultiply_float_simd				\
@@ -34,10 +34,10 @@ int						:	clean 																										\
 							matrixMultiply.o_int_simd			matrix.o_int_simd			matrix_simd.o_int_simd						\
 							matrixMultiply.o_int_simdInvertedB	matrix.o_int_simdInvertedB	matrix_simdInvertedB.o_int_simdInvertedB	\
 							matrixMultiply.o_int_naiveMemOpt	matrix.o_int_naiveMemOpt	matrix_naiveMemOpt.o_int_naiveMemOpt
-#						$(call compileAndExecutePython,int)
-#						$(call compileAndExecuteNaive,int)
-#						$(call compileAndExecuteSimd,int)
-#						$(call compileAndExecuteSimdInvertedB,int)
+						$(call compileAndExecutePython,int)
+						$(call compileAndExecuteNaive,int)
+						$(call compileAndExecuteSimd,int)
+						$(call compileAndExecuteSimdInvertedB,int)
 						$(call compileAndExecuteNaiveMemOpt,int)
 
 
@@ -48,10 +48,10 @@ float					:	clean																												\
 							matrixMultiply.o_float_simd				matrix.o_float_simd				matrix_simd.o_float_simd					\
 							matrixMultiply.o_float_simdInvertedB	matrix.o_float_simdInvertedB	matrix_simdInvertedB.o_float_simdInvertedB	\
 							matrixMultiply.o_float_naiveMemOpt		matrix.o_float_naiveMemOpt		matrix_naiveMemOpt.o_float_naiveMemOpt
-#						$(call compileAndExecutePython,float)
-#						$(call compileAndExecuteNaive,float)
-#						$(call compileAndExecuteSimd,float)
-#						$(call compileAndExecuteSimdInvertedB,float)
+						$(call compileAndExecutePython,float)
+						$(call compileAndExecuteNaive,float)
+						$(call compileAndExecuteSimd,float)
+						$(call compileAndExecuteSimdInvertedB,float)
 						$(call compileAndExecuteNaiveMemOpt,float)
 
 

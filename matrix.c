@@ -39,10 +39,12 @@ void printMatrix(void *M, int TYPE)
 	LOGGER(LOGGER_FLAG_RESULT, "Print the matrix %p of size: %d line and %d column\n", (DATA_TYPE**)M, NLINE, NCOL);
 	for (line = 0; line < NLINE; line++)
 	{
+		printf("\tICIIIII\n");
 		bufferTmp = buffer;
 		for (col = 0; col < NCOL; col++)
 		{
 			bufferTmp += sprintf(bufferTmp, PRINT_FORMAT, GET_MATRIX_GENERIC(M, line, col, TYPE));
+			printf("\t\tICIIIII: %s\n", buffer);
 		}
 		LOGGER(LOGGER_FLAG_RESULT, "%s\n", buffer);
 	}
