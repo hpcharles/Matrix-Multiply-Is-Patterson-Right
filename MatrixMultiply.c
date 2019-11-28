@@ -14,22 +14,21 @@ typedef int typeelt;
 typedef typeelt tMatrix[NLINE][NCOL];
 
 /* Operating system level time measurement */
-
-struct timeval time;
+struct timeval utime;
 
 long long start()
 {
 	struct timezone tz;
-	gettimeofday (&time, &tz);
-	return time.tv_sec*1000000+time.tv_usec;
+	gettimeofday (&utime, &tz);
+	return utime.tv_sec*1000000+utime.tv_usec;
 }
 
 long long stop(long long timeusec)
 {
 	long long fin;
 	struct timezone tz;
-	gettimeofday (&time, &tz);
-	fin = time.tv_sec*1000000+time.tv_usec;
+	gettimeofday (&utime, &tz);
+	fin = utime.tv_sec*1000000+utime.tv_usec;
 	return fin-timeusec;
 }
 
@@ -40,7 +39,10 @@ typedef unsigned long long ticks;
 static __inline__ ticks getticks(void)
 {
 	unsigned a, d;
-	asm volatile("rdtsc" : "=a" (a), "=d" (d));
+	a = d = 0;
+#if 0
+	asm ("rdtsc" : "=a" (a), "=d" (d));
+#endif
 	return ((ticks)a) | (((ticks)d) << 32);
 }
 

@@ -1,4 +1,5 @@
-
+CC = clang
+CC = gcc9
 SIZE = 20
 
 all: 
@@ -10,11 +11,11 @@ all:
 
 int:
 	time ./MatrixMultiply.py ${SIZE} int
-#	gcc ${CFLAGS} -g -o MatrixMultiply MatrixMultiply.c -DNLINE=${SIZE} -DNCOL=${SIZE}
+#	${CC} ${CFLAGS} -g -o MatrixMultiply MatrixMultiply.c -DNLINE=${SIZE} -DNCOL=${SIZE}
 #	time ./MatrixMultiply
 float:
 	time ./MatrixMultiply.py ${SIZE} float
-	gcc ${CFLAGS} -g -o MatrixMultiply MatrixMultiply.c -DNLINE=${SIZE} -DNCOL=${SIZE} -DTYPEELTFLT
+	${CC} ${CFLAGS} -g -o MatrixMultiply MatrixMultiply.c -DNLINE=${SIZE} -DNCOL=${SIZE} -DTYPEELTFLT
 	time ./MatrixMultiply
 clean:
 	rm MatrixMultiply
