@@ -1,17 +1,21 @@
-CC = clang
-CC = gcc9
+CCclang = clang
+CCgcc9 = gcc9
 SIZE = 150
 
 all: 
 	make py    SIZE=${SIZE} 
-	make int   SIZE=${SIZE} CFLAGS="-O0 -Wall"
-	make int   SIZE=${SIZE} CFLAGS="-O3 -Wall"
-	make float SIZE=${SIZE} CFLAGS="-O0 -Wall"
-	make float SIZE=${SIZE} CFLAGS="-O3 -Wall"
+	make float SIZE=${SIZE} CFLAGS="-O3 -Wall -DGEMMVARIANT=1" CC=${CCclang}
+	make float SIZE=${SIZE} CFLAGS="-O3 -Wall -DGEMMVARIANT=2" CC=${CCclang}
+	make float SIZE=${SIZE} CFLAGS="-O3 -Wall -DGEMMVARIANT=3" CC=${CCclang}
 
+experiment:
+	make py    SIZE=${SIZE} 
+	make int   SIZE=${SIZE} CFLAGS="-O0 -Wall" CC=${CCclang}
+	make int   SIZE=${SIZE} CFLAGS="-O3 -Wall" CC=${CCclang}
+	make float SIZE=${SIZE} CFLAGS="-O0 -Wall" CC=${CCclang}
+	make float SIZE=${SIZE} CFLAGS="-O3 -Wall" CC=${py}
 
 py:
-	./MatrixMultiply.py ${SIZE} int
 	./MatrixMultiply.py ${SIZE} float
 
 int:
