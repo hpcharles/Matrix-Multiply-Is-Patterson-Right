@@ -1,12 +1,12 @@
 CCclang = clang
 CCgcc9 = gcc9
-SIZE = 150
+SIZE = 512
 
 all: 
+	make float SIZE=${SIZE} CFLAGS="-O3 -Wall -DGEMMVARIANT=1" CC=${CCclang} 
+	make float SIZE=${SIZE} CFLAGS="-O3 -Wall -DGEMMVARIANT=2" CC=${CCclang} 
+	make float SIZE=${SIZE} CFLAGS="-O3 -Wall -DGEMMVARIANT=3" CC=${CCclang} 
 	make py    SIZE=${SIZE} 
-	make float SIZE=${SIZE} CFLAGS="-O3 -Wall -DGEMMVARIANT=1" CC=${CCclang}
-	make float SIZE=${SIZE} CFLAGS="-O3 -Wall -DGEMMVARIANT=2" CC=${CCclang}
-	make float SIZE=${SIZE} CFLAGS="-O3 -Wall -DGEMMVARIANT=3" CC=${CCclang}
 
 experiment:
 	make py    SIZE=${SIZE} 
@@ -19,17 +19,17 @@ py:
 	./MatrixMultiply.py ${SIZE} float
 
 int:
-	${CC} ${CFLAGS} -g -o MatrixMultiply MatrixMultiply.c -DNLINE=${SIZE} -DNCOL=${SIZE} -DTYPEELT=2
+	${CC} ${CFLAGS} -g -o MatrixMultiply MatrixMultiply.c -DNELT=${SIZE} -DTYPEELT=2
 	 ./MatrixMultiply
 	-rm ./MatrixMultiply
 
 double:
-	${CC} ${CFLAGS} -g -o MatrixMultiply MatrixMultiply.c -DNLINE=${SIZE} -DNCOL=${SIZE} -DTYPEELT=3
+	${CC} ${CFLAGS} -g -o MatrixMultiply MatrixMultiply.c -DNELT=${SIZE} -DTYPEELT=3
 	 ./MatrixMultiply
 	-rm ./MatrixMultiply
 
 float:
-	${CC} ${CFLAGS} -g -o MatrixMultiply MatrixMultiply.c -DNLINE=${SIZE} -DNCOL=${SIZE} -DTYPEELT=1
+	${CC} ${CFLAGS} -g -o MatrixMultiply MatrixMultiply.c -DNELT=${SIZE} -DTYPEELT=1
 	./MatrixMultiply
 	-rm ./MatrixMultiply
 
