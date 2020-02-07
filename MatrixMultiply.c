@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
+#ifdef  __x86_64
 #include <xmmintrin.h>
 #include <pmmintrin.h>
 #include <emmintrin.h>
-
+#endif
 #if TYPEELT == 1             /* FLT */
 typedef float typeelt;
 char printfFormat[] = "%010.2f ";
