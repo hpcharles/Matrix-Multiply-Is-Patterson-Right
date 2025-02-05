@@ -1,37 +1,46 @@
 CCclang = clang
 CCgcc9 = gcc9
-SIZE = 512
+CFLAGS=-O3 -Wall -Werror -g
+JAVAC=javac
+# Binary files
+FILES=MatrixMultiply.class MatrixMultiply MatrixMultiplyThreadParallel
 
-all: 
-	make float SIZE=${SIZE} CFLAGS="-O3 -Wall -DGEMMVARIANT=1" CC=${CCclang} 
-	make float SIZE=${SIZE} CFLAGS="-O3 -Wall -DGEMMVARIANT=2" CC=${CCclang} 
-	make float SIZE=${SIZE} CFLAGS="-O3 -Wall -DGEMMVARIANT=3" CC=${CCclang} 
-	make py    SIZE=${SIZE} 
+all: small
 
-experiment:
-	make py    SIZE=${SIZE} 
-	make int   SIZE=${SIZE} CFLAGS="-O0 -Wall" CC=${CCclang}
-	make int   SIZE=${SIZE} CFLAGS="-O3 -Wall" CC=${CCclang}
-	make float SIZE=${SIZE} CFLAGS="-O0 -Wall" CC=${CCclang}
-	make float SIZE=${SIZE} CFLAGS="-O3 -Wall" CC=${py}
+# do Experiments
+small:
+	make clean do NLINES=100    NCOLUMNS=100
 
-py:
-	./MatrixMultiply.py ${SIZE} float
+medium:
+	make clean do NLINES=500    NCOLUMNS=500
 
-int:
-	${CC} ${CFLAGS} -g -o MatrixMultiply MatrixMultiply.c -DNELT=${SIZE} -DTYPEELT=2
-	 ./MatrixMultiply
-	-rm ./MatrixMultiply
+large:
+	make clean do NLINES=1000   NCOLUMNS=1000
 
-double:
-	${CC} ${CFLAGS} -g -o MatrixMultiply MatrixMultiply.c -DNELT=${SIZE} -DTYPEELT=3
-	 ./MatrixMultiply
-	-rm ./MatrixMultiply
+verylarge:
+	make clean do NLINES=4000   NCOLUMNS=4000
 
-float:
-	${CC} ${CFLAGS} -g -o MatrixMultiply MatrixMultiply.c -DNELT=${SIZE} -DTYPEELT=1
-	./MatrixMultiply
-	-rm ./MatrixMultiply
+rectangularFlat: ${FILES}
+	make clean do NLINES=10     NCOLUMNS=100000
+
+rectangularHigh: ${FILES}
+	make clean do NLINES=5000 NCOLUMNS=16
+
+all:
+	make small medium large verylarge rectangularFlat rectangularHigh
+
+do: ${FILES}
+	./Experiment.py  --numberOfLines ${NLINES} --numberOfColumns ${NCOLUMNS}
+
+# Generate "binary" files
+MatrixMultiply.class: MatrixMultiply.java
+	${JAVAC} $<
+
+MatrixMultiply: MatrixMultiply.c MatrixUtils.c
+	${CC} ${CFLAGS} $^ -o $@
+
+MatrixMultiplyThreadParallel: MatrixMultiplyThreadParallel.c MatrixUtils.c
+	${CC} ${CFLAGS} $^ -o $@
 
 clean:
-	rm MatrixMultiply
+	-rm MatrixMultiply MatrixMultiply.class MatrixMultiplyThreadParallel

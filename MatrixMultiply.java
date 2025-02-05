@@ -3,9 +3,15 @@ import java.util.Random;
 public class MatrixMultiply {
 	public static void main(String[] args) {
 		Random r = new Random();
-		int nLines   = Integer.parseInt(args[0]);
-		int nColumns = Integer.parseInt(args[1]);
 
+		if (args.length < 3)
+			{
+				System.out.println ("Not enough arguments <nLines> <nCols> <referenceTime>");
+				return;
+			}
+		int nLines    = Integer.parseInt(args[0]);
+		int nColumns  = Integer.parseInt(args[1]);
+		double reference = Float.parseFloat(args[2]);
 		double[][] A = new double[nLines][nColumns];
 		double[][] B = new double[nColumns][nLines];
 		double[][] C = new double[nLines][nLines];
@@ -26,7 +32,10 @@ public class MatrixMultiply {
 		}
 		long stop = System.nanoTime();
 		double tdiff = (stop - start) * 1e-9;
-		long nOps = 2*nLines*nColumns*nLines;
-		System.out.printf ("%10s : (%d x %d) %f(s) %d (ops), %f (flops)\n", "Java", nLines, nColumns, tdiff, nOps, (float) nOps/tdiff);
+		double nOps = 2*nLines*nColumns*nLines;
+		double flops = nOps/tdiff;
+		double speedup = flops/reference;
+		System.out.printf ("%10s : (%d x %d) : %5.2f (s) : %d (ops) : %12.2f (flops) %12.2f (speedup)\n",
+						   "Java", nLines, nColumns, tdiff, (int) nOps, flops, speedup);
 	}
 }

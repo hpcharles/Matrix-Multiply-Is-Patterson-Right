@@ -17,20 +17,24 @@ def doCmd(cmdAndArgs, DoitAfficher = False, dir=None):
         sys.exit(-1)
 
 if __name__ == "__main__":
-    import subprocess, os, sys, datetime, argparse
+    import subprocess, os, sys, datetime, argparse, multiprocessing
+    processorNumber = str(multiprocessing.cpu_count())
     p = argparse.ArgumentParser("Build FreeBSD world and kernel")
     p.add_argument("-l", "--numberOfLines",   nargs = 1, default=["100"],   help="Matrix #Line")
     p.add_argument("-c", "--numberOfColumns", nargs = 1, default=["200"],   help="Matrix #Column")
     p.add_argument("-d", "--dataType",        nargs = 1, default=["float"], help="Data type")
+    p.add_argument("-v", "--verbose",         action="store_true",          help="Print commands")
     a = p.parse_args()
     print (a)
 
-    r = doCmd(["./MatrixMultiply.py", "--numberOfLines", a.numberOfLines[0], "--numberOfColumns", a.numberOfColumns[0], "--dataType", a.dataType[0]])
-    print (r)
+    r = doCmd(["./MatrixMultiply.py", "--numberOfLines", a.numberOfLines[0], "--numberOfColumns", a.numberOfColumns[0], "--dataType", a.dataType[0]], a.verbose)
+    print (r, end="")
     reference = r.split(":")[4]
     reference = reference.split()[0]
     doCmd(["javac", "MatrixMultiply.java"])
-    r = doCmd(["java", "MatrixMultiply", a.numberOfLines[0], a.numberOfColumns[0], str(reference)])
-    print (r)
-    r = doCmd(["./MatrixMultiply", a.numberOfLines[0], a.numberOfColumns[0], str(reference)])
-    print (r)
+    r = doCmd(["java", "MatrixMultiply", a.numberOfLines[0], a.numberOfColumns[0], reference], a.verbose)
+    print (r, end="")
+    r = doCmd(["./MatrixMultiply", a.numberOfLines[0], a.numberOfColumns[0], reference], a.verbose)
+    print (r, end="")
+    r = doCmd(["./MatrixMultiplyThreadParallel", a.numberOfLines[0], a.numberOfColumns[0], reference, processorNumber], a.verbose)
+    print (r, end="")
