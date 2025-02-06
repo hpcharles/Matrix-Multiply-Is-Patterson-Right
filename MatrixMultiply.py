@@ -60,5 +60,6 @@ if __name__ == "__main__":
     timeStart = time.process_time()
     C = standardMatrixProduct(A, B)
     timeEnd = time.process_time()
-    nOps = 2*nLines*nColumns*nLines
-    print ("%10s : (%d x %d) : %5.2f (s) : %d (ops): %12.2f (flops)"%("Python", nLines, nColumns, timeEnd - timeStart, nOps, nOps/(timeEnd - timeStart)))
+    nOps = 2*nLines*nColumns*nLines/1000000
+    print ("Version    ; size        ; time (s) ; #Gops ; Gflops; speedup");
+    print ("%10s ; %5dx%5d ; %5.2f ; %d; %12.2f; 1"%("Python", nLines, nColumns, timeEnd - timeStart, nOps, nOps/(timeEnd - timeStart)))

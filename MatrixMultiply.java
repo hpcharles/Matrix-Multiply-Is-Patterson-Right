@@ -32,10 +32,11 @@ public class MatrixMultiply {
 		}
 		long stop = System.nanoTime();
 		double tdiff = (stop - start) * 1e-9;
-		double nOps = 2*nLines*nColumns*nLines;
+		double nOps = 2*nLines*nColumns*nLines/1000000;
 		double flops = nOps/tdiff;
 		double speedup = flops/reference;
-		System.out.printf ("%10s : (%d x %d) : %5.2f (s) : %d (ops) : %12.2f (flops) %12.2f (speedup)\n",
+		System.out.println("Version    ; size       ; time (s) ; #Gops ; Gflops; speedup");
+		System.out.printf ("%10s ; %5dx%5d ; %5.2f ; %d  ; %12.2f ; %12.2f\n",
 						   "Java", nLines, nColumns, tdiff, (int) nOps, flops, speedup);
 	}
 }

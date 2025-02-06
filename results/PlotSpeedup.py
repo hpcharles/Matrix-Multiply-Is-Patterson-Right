@@ -3,7 +3,13 @@
 if __name__ == "__main__":
     import matplotlib.pyplot as p
     import sys
-    dataSets = ["i5-8500-100x100.data", "i5-8500-500x500.data", "i5-8500-1000x1000.data",]
+    dataSets = ["i5-8500-00100x00100.data",
+                "i5-8500-00500x00500.data",
+                "i5-8500-01000x01000.data",
+#                "i5-8500-04000x04000.data",
+                "i5-8500-00010x10000.data",
+                "i5-8500-05000x00016.data",
+                ]
     fig, ax = p.subplots()
     lineStyle = '.-'
     for fileName in dataSets:

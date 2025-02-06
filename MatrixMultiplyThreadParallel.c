@@ -89,8 +89,8 @@ int main(int argc, char * argv[])
 	}
   nLines     = atoi(argv[1]);
   nColumns   = atoi(argv[2]);
-  reference  = atoi(argv[3]);
-  nThread    = atoi(argv[4]);
+  nThread    = atoi(argv[3]);
+  reference  = atoi(argv[4]);
 
   a = createMatrix(nLines, nColumns);
   randMatrix   (a, nLines, nColumns);
@@ -101,10 +101,11 @@ int main(int argc, char * argv[])
   mulMatrix(a, b, c, nLines, nColumns);
   endTime = getTime();
   duration = (endTime-startTime)/1000000.0;
-  nOps = 2 * nLines * nLines * nColumns;
+  nOps = 2 * nLines * nLines * nColumns/ 1000000;
   flops = nOps / duration;
   speedup = flops/reference;
-  printf ("%10s : (%d x %d) : %5.2f (s) : %d (ops) : %12.2f (flops) %12.2f (speedup)\n", "C pthread", nLines, nColumns, duration, (int) nOps, flops, speedup);
+  printf ("Version    ; size       ; time (s) ; #Gops ; flops; speedup\n");
+  printf ("%10s ; %5dx%5d ;%5.2f; %d; %5.2f;%5.2f\n", "C pthread", nLines, nColumns, duration, (int) nOps, flops, speedup);
   printf ("Thread N %d Dummy result : %f̣\n", nThread, c[0][0]);
   return 0;
 }
