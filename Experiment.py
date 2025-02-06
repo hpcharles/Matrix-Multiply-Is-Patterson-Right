@@ -66,8 +66,8 @@ if __name__ == "__main__":
 
     toRun = {
         "python": ["./MatrixMultiply.py", "--numberOfLines", numberOfLines, "--numberOfColumns", numberOfColumns, "--dataType", a.dataType[0]],
-        "java": ["java", "MatrixMultiply", numberOfLines, numberOfColumns],
-        "c": ["./MatrixMultiply", numberOfLines, numberOfColumns],
+        "java":   ["java", "MatrixMultiply", numberOfLines, numberOfColumns],
+        "c":      ["./MatrixMultiply", numberOfLines, numberOfColumns],
         "cparallel": ["./MatrixMultiplyThreadParallel", numberOfLines, numberOfColumns, processorNumber],
     }
     # Make clean & build binaries
