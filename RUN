@@ -1,0 +1,8 @@
+#!/usr/bin/env tcsh
+
+./Experiment.py -s
+./Experiment.py -m
+./Experiment.py -l
+./Experiment.py -y
+./Experiment.py -r 
+./Experiment.py -i
