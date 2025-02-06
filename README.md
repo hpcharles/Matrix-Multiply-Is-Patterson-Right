@@ -6,7 +6,7 @@ This small project is an educationnal project. The idea is to show the
 performance improvement for a simple algorithm between an
 implementation in :
 
-- [x] an interpreted version (naive python),
+* [x] an interpreted version (naive python),
 * [x] a Java naive version
 * [x] a C naive version
 * [x] a C parallel version (pthreads)
@@ -22,10 +22,18 @@ different optimization approaches and to verify that Pattersion is
 right about performance improvment (see slide "There is plenty room at
 the top" in the video) or the article "A New Golden Age for Computer Architecture"
 
-![Original image from Hennessy & Pattersson](PotentialSpeedup.png)
+![Original plot from Hennessy & Pattersson/Leiserson](PotentialSpeedup.png)
 
 ## Experiment
 
+We run multiple variant of the matrix multiplication. The main differences with the __original code__ are
+* We use dynamic allocation for matrices
+* We use multiple size matrices
+* We use non square matrices
+
+![Our experiment on an Intel i5-8500 processor](results/i5-8500.png)
+
+Comments on our experiments : TBD
 
 ## Authors ##
 
