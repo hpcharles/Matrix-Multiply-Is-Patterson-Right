@@ -5,13 +5,13 @@ Check if gcc, javac and java are installed :
 -->which javac
 
 Version    ; size        ; time (s) ; #Gops ; Gflops; speedup
-    Python ; 00100x00100 ;  0.29 ; 2;         6.92; 1
+    Python ; 00100x00100 ;  0.32 ; 2;         6.32; 1
 Version    ; size       ; time (s) ; #Gops ; Gflops; speedup
-      Java ; 00100x00100 ;  0,01 ; 2  ;       136,99 ;        19,80
-Dummy result : 26,235142̣
+      Java ; 00100x00100 ;  0,02 ; 2  ;       127,78 ;        20,22
+Dummy result : 21,254375̣
 Version    ; size       ; time (s) ; #Gops ; flops; speedup
-         C ; 00100x00100 ;  0.00; 2  ; 668.90; 111.48
+         C ; 00100x00100 ;  0.00; 2  ; 572.90; 95.48
 Dummy result : 263037.000000̣
 Version    ; size       ; time (s) ; #Gops ; flops; speedup
- C pthread ; 00100x00100 ; 0.01; 2; 394.01;65.67
+ C pthread ; 00100x00100 ; 0.01; 2; 318.42;53.07
 Thread N 8 Dummy result : 263037.000000̣

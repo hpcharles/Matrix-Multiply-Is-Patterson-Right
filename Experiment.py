@@ -26,7 +26,7 @@ def checkBinary(CC, JAVA, JAVAC):
 dataSize = {
     "tiny":            (  "10",     "10"),
     "small":           ( "100",    "100"),
-    "medium":          (" 500",    "500"),
+    "medium":          ( "500",    "500"),
     "large":           ("1000",   "1000"),
     "verylarge":       ("2000",   "2000"),
     "rectangularFlat": (  "10", "100000"),
