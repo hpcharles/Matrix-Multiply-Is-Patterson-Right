@@ -1,0 +1,17 @@
+Namespace(dataType=['float'], verbose=False, matrixName=['small'])
+Check if gcc, javac and java are installed :
+-->which gcc
+-->which java
+-->which javac
+
+Version    ; size        ; time (s) ; #Gops ; Gflops; speedup
+    Python ; 00100x00100 ;  0.29 ; 2;         6.92; 1
+Version    ; size       ; time (s) ; #Gops ; Gflops; speedup
+      Java ; 00100x00100 ;  0,01 ; 2  ;       136,99 ;        19,80
+Dummy result : 26,235142̣
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+         C ; 00100x00100 ;  0.00; 2  ; 668.90; 111.48
+Dummy result : 263037.000000̣
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+ C pthread ; 00100x00100 ; 0.01; 2; 394.01;65.67
+Thread N 8 Dummy result : 263037.000000̣

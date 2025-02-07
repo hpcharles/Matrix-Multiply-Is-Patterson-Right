@@ -1,10 +1,6 @@
 #!/usr/bin/env tcsh
 
-./Experiment.py -n small
-./Experiment.py -n mediumm
-./Experiment.py -n large
-./Experiment.py -n verylarge
-./Experiment.py -n rectangularFlat
-./Experiment.py -n bar
-./Experiment.py -n rectangularHigh
-./Experiment.py -n line
+
+foreach SIZE (small  medium  large  verylarge  rectangularFlat  bar  rectangularHigh  line)
+	./Experiment.py -n $SIZE
+end
