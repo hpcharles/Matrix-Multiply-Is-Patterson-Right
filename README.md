@@ -34,12 +34,14 @@ We run multiple variant of the matrix multiplication. The main differences with 
 
 Comments on our experiments : in practice things a much more complicated
 
-![GFLOPS measurement on an Intel i5-8500 processor](results/LOGFILE.i5-8500.data-GFLOPS.png){width=40%}
-![Speedup measurement on an Intel i5-8500 processor](results/LOGFILE.i5-8500.data-speedup.png){width=40%}
+![GFLOPS measurement on an Intel i5-8500 processor](results/LOGFILE.i5-8500.data-GFLOPS.png "GFLOPS on Intel i5-8500"){width=40%}
+![Speedup measurement on an Intel i5-8500 processor](results/LOGFILE.i5-8500.data-speedup.png "Speedup on Intel i5-8500"){width=40%}
 
-![GFLOPS  measurement on an Intel i7-8665U processor](results/LOGFILE.i7-8665U.data-GFLOPS.png){width=40%}
-![Speedup measurement on an Intel i7-8665U processor](results/LOGFILE.i7-8665U.data-speedup.png){width=40%}
+![GFLOPS  measurement on an Intel i7-8665U processor](results/LOGFILE.i7-8665U.data-GFLOPS.png "GFLOPS / Intel i7-8665U"){width=40%}
+![Speedup measurement on an Intel i7-8665U processor](results/LOGFILE.i7-8665U.data-speedup.png "Speedup / Intel i7-8665U"){width=40%}
 
+General comments :
+* Parallelism is not usefull
 
 ## Authors ##
 
