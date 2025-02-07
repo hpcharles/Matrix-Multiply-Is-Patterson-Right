@@ -34,11 +34,11 @@ We run multiple variant of the matrix multiplication. The main differences with 
 
 Comments on our experiments : in practice things a much more complicated
 
-![GFLOPS measurement on an Intel i5-8500 processor](results/LOGFILE.i5-8500.data-GFLOPS.png)
-![Speedup measurement on an Intel i5-8500 processor](results/LOGFILE.i5-8500.data-speedup.png)
+![GFLOPS measurement on an Intel i5-8500 processor](results/LOGFILE.i5-8500.data-GFLOPS.png){width=40%}
+![Speedup measurement on an Intel i5-8500 processor](results/LOGFILE.i5-8500.data-speedup.png){width=40%}
 
-![GFLOPS  measurement on an Intel i7-8665U processor](results/LOGFILE.i7-8665U.data-GFLOPS.png)
-![Speedup measurement on an Intel i7-8665U processor](results/LOGFILE.i7-8665U.data-speedup.png)
+![GFLOPS  measurement on an Intel i7-8665U processor](results/LOGFILE.i7-8665U.data-GFLOPS.png){width=40%}
+![Speedup measurement on an Intel i7-8665U processor](results/LOGFILE.i7-8665U.data-speedup.png){width=40%}
 
 
 ## Authors ##
