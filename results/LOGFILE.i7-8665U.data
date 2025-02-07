@@ -15,3 +15,122 @@ Dummy result : 263037.000000̣
 Version    ; size       ; time (s) ; #Gops ; flops; speedup
  C pthread ; 00100x00100 ; 0.01; 2; 318.42;53.07
 Thread N 8 Dummy result : 263037.000000̣
+Namespace(dataType=['float'], verbose=False, matrixName=['medium'])
+Check if gcc, javac and java are installed :
+-->which gcc
+-->which java
+-->which javac
+
+Version    ; size        ; time (s) ; #Gops ; Gflops; speedup
+    Python ; 00500x00500 ; 41.95 ; 250;         5.96; 1
+Version    ; size       ; time (s) ; #Gops ; Gflops; speedup
+      Java ; 00500x00500 ;  0,88 ; 250  ;       284,35 ;        47,71
+Dummy result : 118,692688̣
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+         C ; 00500x00500 ;  0.36; 250  ; 687.61; 137.52
+Dummy result : 1252442.000000̣
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+ C pthread ; 00500x00500 ; 0.20; 250; 1263.56;252.71
+Thread N 8 Dummy result : 1252442.000000̣
+Namespace(dataType=['float'], verbose=False, matrixName=['large'])
+Check if gcc, javac and java are installed :
+-->which gcc
+-->which java
+-->which javac
+
+Version    ; size        ; time (s) ; #Gops ; Gflops; speedup
+    Python ; 01000x01000 ; 381.99 ; 2000;         5.24; 1
+Version    ; size       ; time (s) ; #Gops ; Gflops; speedup
+      Java ; 01000x01000 ;  3,86 ; 2000  ;       518,42 ;        98,94
+Dummy result : 253,686646̣
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+         C ; 01000x01000 ;  4.55; 2000  ; 439.70; 87.94
+Dummy result : 2427166.000000̣
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+ C pthread ; 01000x01000 ; 4.16; 2000; 481.26;96.25
+Thread N 8 Dummy result : 2427166.000000̣
+Namespace(dataType=['float'], verbose=False, matrixName=['verylarge'])
+Check if gcc, javac and java are installed :
+-->which gcc
+-->which java
+-->which javac
+
+Version    ; size        ; time (s) ; #Gops ; Gflops; speedup
+    Python ; 02000x02000 ; 3273.74 ; 16000;         4.89; 1
+Version    ; size       ; time (s) ; #Gops ; Gflops; speedup
+      Java ; 02000x02000 ; 147,39 ; 16000  ;       108,56 ;        22,20
+Dummy result : 502,614563̣
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+         C ; 02000x02000 ; 89.06; 16000  ; 179.65; 44.91
+Dummy result : 4971652.000000̣
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+ C pthread ; 02000x02000 ;31.28; 16000; 511.43;127.86
+Thread N 8 Dummy result : 4971652.000000̣
+Namespace(dataType=['float'], verbose=False, matrixName=['rectangularFlat'])
+Check if gcc, javac and java are installed :
+-->which gcc
+-->which java
+-->which javac
+
+Version    ; size        ; time (s) ; #Gops ; Gflops; speedup
+    Python ; 00010x100000 ;  3.38 ; 20;         5.91; 1
+Version    ; size       ; time (s) ; #Gops ; Gflops; speedup
+      Java ; 00010x100000 ;  0,08 ; 20  ;       247,40 ;        41,86
+Dummy result : 24940,898438̣
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+         C ; 00010x100000 ;  0.03; 20  ; 707.54; 141.51
+Dummy result : 244948176.000000̣
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+ C pthread ; 00010x100000 ; 0.01; 20; 1706.19;341.24
+Thread N 8 Dummy result : 244948176.000000̣
+Namespace(dataType=['float'], verbose=False, matrixName=['bar'])
+Check if gcc, javac and java are installed :
+-->which gcc
+-->which java
+-->which javac
+
+Version    ; size        ; time (s) ; #Gops ; Gflops; speedup
+    Python ; 00001x1000000 ;  0.39 ; 2;         5.07; 1
+Version    ; size       ; time (s) ; #Gops ; Gflops; speedup
+      Java ; 00001x1000000 ;  0,02 ; 2  ;        94,25 ;        18,59
+Dummy result : 249793,500000̣
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+         C ; 00001x1000000 ;  0.00; 2  ; 420.61; 84.12
+Dummy result : 2451700736.000000̣
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+ C pthread ; 00001x1000000 ; 0.01; 2; 244.95;48.99
+Thread N 8 Dummy result : 2451700736.000000̣
+Namespace(dataType=['float'], verbose=False, matrixName=['rectangularHigh'])
+Check if gcc, javac and java are installed :
+-->which gcc
+-->which java
+-->which javac
+
+Version    ; size        ; time (s) ; #Gops ; Gflops; speedup
+    Python ; 05000x00016 ; 132.71 ; 800;         6.03; 1
+Version    ; size       ; time (s) ; #Gops ; Gflops; speedup
+      Java ; 05000x00016 ;  1,49 ; 800  ;       536,49 ;        88,97
+Dummy result : 4,055712̣
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+         C ; 05000x00016 ;  1.12; 800  ; 714.96; 119.16
+Dummy result : 54879.000000̣
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+ C pthread ; 05000x00016 ; 0.51; 800; 1556.05;259.34
+Thread N 8 Dummy result : 54879.000000̣
+Namespace(dataType=['float'], verbose=False, matrixName=['line'])
+Check if gcc, javac and java are installed :
+-->which gcc
+-->which java
+-->which javac
+
+Version    ; size        ; time (s) ; #Gops ; Gflops; speedup
+    Python ; 05000x00001 ; 21.06 ; 50;         2.37; 1
+Version    ; size       ; time (s) ; #Gops ; Gflops; speedup
+      Java ; 05000x00001 ;  0,17 ; 50  ;       302,00 ;       127,43
+Dummy result : 0,036418̣
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+         C ; 05000x00001 ;  0.08; 50  ; 663.71; 331.86
+Dummy result : 3569.000000̣
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+ C pthread ; 05000x00001 ; 0.17; 50; 298.96;149.48
+Thread N 8 Dummy result : 3569.000000̣

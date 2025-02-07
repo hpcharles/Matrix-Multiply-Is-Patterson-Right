@@ -31,9 +31,15 @@ We run multiple variant of the matrix multiplication. The main differences with 
 * We use multiple size matrices
 * We use non square matrices
 
-![Our experiment on an Intel i5-8500 processor](results/i5-8500.png)
 
-Comments on our experiments : TBD
+Comments on our experiments : in practice things a much more complicated
+
+![GFLOPS measurement on an Intel i5-8500 processor](results/LOGFILE.i5-8500.data-GFLOPS.png)
+![Speedup measurement on an Intel i5-8500 processor](results/LOGFILE.i5-8500.data-speedup.png)
+
+![GFLOPS  measurement on an Intel i7-8665U processor](results/LOGFILE.i7-8665U.data-GFLOPS.png)
+![Speedup measurement on an Intel i7-8665U processor](results/LOGFILE.i7-8665U.data-speedup.png)
+
 
 ## Authors ##
 
