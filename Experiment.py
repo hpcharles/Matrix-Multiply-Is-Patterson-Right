@@ -24,12 +24,15 @@ def checkBinary(CC, JAVA, JAVAC):
     print("")
 
 dataSize = {
-    "small":           ("100",  "100"),
-    "medium":          ("500",  "500"),
-    "large":           ("1000", "1000"),
-    "verylarge":       ("4000", "4000"),
-    "rectangularFlat": ("10",   "100000"),
-    "rectangularHigh": ("5000", "16"),
+    "tiny":            (  "10",     "10"),
+    "small":           ( "100",    "100"),
+    "medium":          (" 500",    "500"),
+    "large":           ("1000",   "1000"),
+    "verylarge":       ("2000",   "2000"),
+    "rectangularFlat": (  "10", "100000"),
+    "bar":             (   "1","1000000"),
+    "rectangularHigh": ("5000",     "16"),
+    "line":            ("5000",      "1"),
  }
 
 
@@ -38,23 +41,11 @@ if __name__ == "__main__":
     p = argparse.ArgumentParser("Build FreeBSD world and kernel")
     p.add_argument("-d", "--dataType",        nargs = 1, default=["float"], help="Data type")
     p.add_argument("-v", "--verbose",         action="store_true",          help="Print commands")
-    p.add_argument("-s", "--small",           action="store_true",          help="Verbose")
-    p.add_argument("-m", "--medium",          action="store_true",          help="Small matrix")
-    p.add_argument("-l", "--large",           action="store_true",          help="Large matrix")
-    p.add_argument("-y", "--verylarge",       action="store_true",          help="Very Large matrix")
-    p.add_argument("-r", "--rectangularFlat", action="store_true",          help="Rectangle matrix flat")
-    p.add_argument("-i", "--rectangularHigh", action="store_true",          help="Rectangle matrix High")
+    p.add_argument("-n", "--matrixName",      nargs = 1, default=["small"], help="Matrix name: \n%s"%(dataSize.keys()))
     a = p.parse_args()
     print (a)
 
-    if   a.small:           (numberOfLines, numberOfColumns) = dataSize['small']
-    elif a.medium:          (numberOfLines, numberOfColumns) = dataSize['medium']
-    elif a.large:           (numberOfLines, numberOfColumns) = dataSize['large']
-    elif a.verylarge:       (numberOfLines, numberOfColumns) = dataSize['verylarge']
-    elif a.rectangularFlat: (numberOfLines, numberOfColumns) = dataSize['rectangularFlat']
-    elif a.rectangularHigh: (numberOfLines, numberOfColumns) = dataSize['rectangularHigh']
-    else:                   (numberOfLines, numberOfColumns) = dataSize['small']
-
+    (numberOfLines, numberOfColumns) = dataSize[a.matrixName[0]]
     checkBinary("gcc", "javac", "java")
     processorNumber = str(multiprocessing.cpu_count())
 

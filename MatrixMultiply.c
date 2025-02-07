@@ -40,7 +40,7 @@ int main(int argc, char * argv[])
 {
   long long startTime, endTime, nOps;
   float duration, flops, speedup;
-  int nColumns, nLines;
+  long nColumns, nLines;
   long reference;
 
   if (argc < 4)
@@ -70,7 +70,7 @@ int main(int argc, char * argv[])
   flops = nOps / duration;
   speedup = flops/reference;
   printf ("Version    ; size       ; time (s) ; #Gops ; flops; speedup\n");
-  printf ("%10s ; %5dx%5d ; %5.2f; %d  ; %5.2f; %5.2f\n", "C", nLines, nColumns, duration, (int) nOps, flops, speedup);
+  printf ("%10s ; %05ldx%05ld ; %5.2f; %d  ; %5.2f; %5.2f\n", "C", nLines, nColumns, duration, (int) nOps, flops, speedup);
   printf ("Dummy result : %f̣\n", c[0][0]);
 #if PRINT
   printMatrix (c);

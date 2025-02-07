@@ -62,4 +62,4 @@ if __name__ == "__main__":
     timeEnd = time.process_time()
     nOps = 2*nLines*nColumns*nLines/1000000
     print ("Version    ; size        ; time (s) ; #Gops ; Gflops; speedup");
-    print ("%10s ; %5dx%5d ; %5.2f ; %d; %12.2f; 1"%("Python", nLines, nColumns, timeEnd - timeStart, nOps, nOps/(timeEnd - timeStart)))
+    print ("%10s ; %05dx%05d ; %5.2f ; %d; %12.2f; 1"%("Python", nLines, nColumns, timeEnd - timeStart, nOps, nOps/(timeEnd - timeStart)))

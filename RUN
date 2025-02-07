@@ -1,8 +1,10 @@
 #!/usr/bin/env tcsh
 
-./Experiment.py -s
-./Experiment.py -m
-./Experiment.py -l
-./Experiment.py -y
-./Experiment.py -r 
-./Experiment.py -i
+./Experiment.py -n small
+./Experiment.py -n mediumm
+./Experiment.py -n large
+./Experiment.py -n verylarge
+./Experiment.py -n rectangularFlat
+./Experiment.py -n bar
+./Experiment.py -n rectangularHigh
+./Experiment.py -n line
