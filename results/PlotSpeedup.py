@@ -17,10 +17,10 @@ if __name__ == "__main__":
         # model name	: Intel(R) Core(TM) i5-8500 CPU @ 3.00GHz
         # stepping	: 10
         # microcode	: 0xf8
-        # cpu MHz		: 3677.633
+        # cpu MHz	: 3677.633 (3.6Gz)
         # https://stackoverflow.com/questions/16038729/max-flops-for-matrix-multiplication-intel-amd-cpu
-        # Max SP FLOPs/s = frequencey * 4 SSE(8AVX) * 2 (MAC) * number of cores (not HW threads
-        "i5-8500":  3.6*4*2*6 ,
+        # Max SP FLOPs/s = frequencey * 4 SSE(8AVX) * 2 (MAC) * number of cores (not HW threads)
+        "i5-8500":  3.6*4*2*6,
         "i7-8665U": 442.0,   # https://cpu-benchmark.org/fr/cpu/intel-core-i7-8665u/
     }
     import matplotlib.pyplot as p
@@ -77,11 +77,10 @@ if __name__ == "__main__":
         plot = ax.plot(X, Y, lineStyle, label = size)
         p.legend()
     # Add maximum line
-    # xmin, xmax = ax.get_xbound()
-    # ymax = GFLOPS["i5-8500"]
-    # ymin = GFLOPS["i5-8500"]
-    # l = mlines.Line2D([xmin,xmax], [ymin,ymax])
-    # ax.add_line(l)
+    xmin, xmax = ax.get_xbound()
+    ymax = GFLOPS["i5-8500"]
+    ymin = GFLOPS["i5-8500"]
+    ax.add_line(mlines.Line2D([xmin,xmax], [ymin,ymax]))
     fileName = sys.argv[1]+"-GFLOPS.png"
     print ("Image saved in %s"%fileName)
     p.savefig(fileName)

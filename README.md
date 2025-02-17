@@ -41,8 +41,10 @@ Comments on our experiments : in practice things a much more complicated
 ![Speedup measurement on an Intel i7-8665U processor](results/LOGFILE.i7-8665U.data-speedup.png "Speedup / Intel i7-8665U"){width=40%}
 
 General comments :
-* Parallelism is not usefull
-
+* Parallelism is not usefull on small matrix size
+* There is a big variability in performances depending 	on the matrix size
+* There is 2 order of magnitude between python and Java
+* There is 1 order of magnitude between Java and C
 ## Authors ##
 
 * Henri-Pierre Charles

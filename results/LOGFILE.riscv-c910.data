@@ -1,0 +1,177 @@
+Namespace(dataType=['float'], verbose=True, matrixName=['tiny'])
+Check if gcc, javac and java are installed :
+-->which gcc
+-->which java
+-->which javac
+
+-->rm -f MatrixMultiply MatrixMultiply.class MatrixMultiplyThreadParallel
+-->gcc -O3 -Wall -Werror -o MatrixMultiply MatrixMultiply.c MatrixUtils.c
+-->gcc -O3 -Wall -Werror -o MatrixMultiplyThreadParallel MatrixMultiplyThreadParallel.c MatrixUtils.c
+-->javac MatrixMultiply.java
+-->./MatrixMultiply.py --numberOfLines 10 --numberOfColumns 10 --dataType float
+Version    ; size        ; time (s) ; #Gops ; Gflops; speedup
+    Python ; 00010x00010 ;  0.00 ; 0;         1.21; 1
+-->java MatrixMultiply 10 10 1.21
+Version    ; size       ; time (s) ; #Gops ; Gflops; speedup
+      Java ; 00010x00010 ;  0.00 ; 0  ;         0.00 ;         0.00
+Dummy result : 2.542414?
+-->./MatrixMultiply 10 10 1.21
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+         C ; 00010x00010 ;  0.00; 0  ;  0.00;  0.00
+Dummy result : 31625.000000̣
+-->./MatrixMultiplyThreadParallel 10 10 4 1.21
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+ C pthread ; 00010x00010 ; 0.00; 0;  0.00; 0.00
+Thread N 4 Dummy result : 31625.000000̣
+Namespace(dataType=['float'], verbose=True, matrixName=['small'])
+Check if gcc, javac and java are installed :
+-->which gcc
+-->which java
+-->which javac
+
+-->rm -f MatrixMultiply MatrixMultiply.class MatrixMultiplyThreadParallel
+-->gcc -O3 -Wall -Werror -o MatrixMultiply MatrixMultiply.c MatrixUtils.c
+-->gcc -O3 -Wall -Werror -o MatrixMultiplyThreadParallel MatrixMultiplyThreadParallel.c MatrixUtils.c
+-->javac MatrixMultiply.java
+-->./MatrixMultiply.py --numberOfLines 100 --numberOfColumns 100 --dataType float
+Version    ; size        ; time (s) ; #Gops ; Gflops; speedup
+    Python ; 00100x00100 ;  1.45 ; 2;         1.38; 1
+-->java MatrixMultiply 100 100 1.38
+Version    ; size       ; time (s) ; #Gops ; Gflops; speedup
+      Java ; 00100x00100 ;  0.09 ; 2  ;        21.78 ;        15.79
+Dummy result : 25.075001?
+-->./MatrixMultiply 100 100 1.38
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+         C ; 00100x00100 ;  0.01; 2  ; 390.47; 390.47
+Dummy result : 263037.000000̣
+-->./MatrixMultiplyThreadParallel 100 100 4 1.38
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+ C pthread ; 00100x00100 ; 0.02; 2; 94.54;94.54
+Thread N 4 Dummy result : 263037.000000̣
+Namespace(dataType=['float'], verbose=True, matrixName=['medium'])
+Check if gcc, javac and java are installed :
+-->which gcc
+-->which java
+-->which javac
+
+-->rm -f MatrixMultiply MatrixMultiply.class MatrixMultiplyThreadParallel
+-->gcc -O3 -Wall -Werror -o MatrixMultiply MatrixMultiply.c MatrixUtils.c
+-->gcc -O3 -Wall -Werror -o MatrixMultiplyThreadParallel MatrixMultiplyThreadParallel.c MatrixUtils.c
+-->javac MatrixMultiply.java
+-->./MatrixMultiply.py --numberOfLines 500 --numberOfColumns 500 --dataType float
+Version    ; size        ; time (s) ; #Gops ; Gflops; speedup
+    Python ; 00500x00500 ; 232.78 ; 250;         1.07; 1
+-->java MatrixMultiply 500 500 1.07
+Version    ; size       ; time (s) ; #Gops ; Gflops; speedup
+      Java ; 00500x00500 ;  4.84 ; 250  ;        51.69 ;        48.31
+Dummy result : 115.364082?
+-->./MatrixMultiply 500 500 1.07
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+         C ; 00500x00500 ;  1.64; 250  ; 152.43; 152.43
+Dummy result : 1252442.000000̣
+-->./MatrixMultiplyThreadParallel 500 500 4 1.07
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+ C pthread ; 00500x00500 ; 1.34; 250; 186.74;186.74
+Thread N 4 Dummy result : 1252442.000000̣
+Namespace(dataType=['float'], verbose=True, matrixName=['large'])
+Check if gcc, javac and java are installed :
+-->which gcc
+-->which java
+-->which javac
+
+-->rm -f MatrixMultiply MatrixMultiply.class MatrixMultiplyThreadParallel
+-->gcc -O3 -Wall -Werror -o MatrixMultiply MatrixMultiply.c MatrixUtils.c
+-->gcc -O3 -Wall -Werror -o MatrixMultiplyThreadParallel MatrixMultiplyThreadParallel.c MatrixUtils.c
+-->javac MatrixMultiply.java
+-->./MatrixMultiply.py --numberOfLines 1000 --numberOfColumns 1000 --dataType float
+Version    ; size        ; time (s) ; #Gops ; Gflops; speedup
+    Python ; 01000x01000 ; 2056.45 ; 2000;         0.97; 1
+-->java MatrixMultiply 1000 1000 0.97
+Version    ; size       ; time (s) ; #Gops ; Gflops; speedup
+      Java ; 01000x01000 ; 80.60 ; 2000  ;        24.81 ;        25.58
+Dummy result : 244.064545?
+-->./MatrixMultiply 1000 1000 0.97
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+         C ; 01000x01000 ; 21.20; 2000  ; 94.36;   inf
+Dummy result : 2427166.000000̣
+-->./MatrixMultiplyThreadParallel 1000 1000 4 0.97
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+ C pthread ; 01000x01000 ;16.70; 2000; 119.76;  inf
+Thread N 4 Dummy result : 2427166.000000̣
+Namespace(dataType=['float'], verbose=True, matrixName=['verylarg'])
+Namespace(dataType=['float'], verbose=True, matrixName=['retangularFlat'])
+Namespace(dataType=['float'], verbose=True, matrixName=['bar'])
+Check if gcc, javac and java are installed :
+-->which gcc
+-->which java
+-->which javac
+
+-->rm -f MatrixMultiply MatrixMultiply.class MatrixMultiplyThreadParallel
+-->gcc -O3 -Wall -Werror -o MatrixMultiply MatrixMultiply.c MatrixUtils.c
+-->gcc -O3 -Wall -Werror -o MatrixMultiplyThreadParallel MatrixMultiplyThreadParallel.c MatrixUtils.c
+-->javac MatrixMultiply.java
+-->./MatrixMultiply.py --numberOfLines 1 --numberOfColumns 1000000 --dataType float
+Version    ; size        ; time (s) ; #Gops ; Gflops; speedup
+    Python ; 00001x1000000 ;  1.83 ; 2;         1.10; 1
+-->java MatrixMultiply 1 1000000 1.10
+Version    ; size       ; time (s) ; #Gops ; Gflops; speedup
+      Java ; 00001x1000000 ;  0.10 ; 2  ;        19.28 ;        17.53
+Dummy result : 250013.046875?
+-->./MatrixMultiply 1 1000000 1.10
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+         C ; 00001x1000000 ;  0.02; 2  ; 88.57; 88.57
+Dummy result : 2451700736.000000̣
+-->./MatrixMultiplyThreadParallel 1 1000000 4 1.10
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+ C pthread ; 00001x1000000 ; 0.14; 2; 14.60;14.60
+Thread N 4 Dummy result : 2451700736.000000̣
+Namespace(dataType=['float'], verbose=True, matrixName=['rectangularHigh'])
+Check if gcc, javac and java are installed :
+-->which gcc
+-->which java
+-->which javac
+
+-->rm -f MatrixMultiply MatrixMultiply.class MatrixMultiplyThreadParallel
+-->gcc -O3 -Wall -Werror -o MatrixMultiply MatrixMultiply.c MatrixUtils.c
+-->gcc -O3 -Wall -Werror -o MatrixMultiplyThreadParallel MatrixMultiplyThreadParallel.c MatrixUtils.c
+-->javac MatrixMultiply.java
+-->./MatrixMultiply.py --numberOfLines 5000 --numberOfColumns 16 --dataType float
+Version    ; size        ; time (s) ; #Gops ; Gflops; speedup
+    Python ; 05000x00016 ; 707.44 ; 800;         1.13; 1
+-->java MatrixMultiply 5000 16 1.13
+Version    ; size       ; time (s) ; #Gops ; Gflops; speedup
+      Java ; 05000x00016 ; 13.30 ; 800  ;        60.16 ;        53.24
+Dummy result : 5.633684?
+-->./MatrixMultiply 5000 16 1.13
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+         C ; 05000x00016 ;  3.09; 800  ; 259.00; 259.00
+Dummy result : 54879.000000̣
+-->./MatrixMultiplyThreadParallel 5000 16 4 1.13
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+ C pthread ; 05000x00016 ; 1.95; 800; 409.27;409.27
+Thread N 4 Dummy result : 54879.000000̣
+Namespace(dataType=['float'], verbose=True, matrixName=['line'])
+Check if gcc, javac and java are installed :
+-->which gcc
+-->which java
+-->which javac
+
+-->rm -f MatrixMultiply MatrixMultiply.class MatrixMultiplyThreadParallel
+-->gcc -O3 -Wall -Werror -o MatrixMultiply MatrixMultiply.c MatrixUtils.c
+-->gcc -O3 -Wall -Werror -o MatrixMultiplyThreadParallel MatrixMultiplyThreadParallel.c MatrixUtils.c
+-->javac MatrixMultiply.java
+-->./MatrixMultiply.py --numberOfLines 5000 --numberOfColumns 1 --dataType float
+Version    ; size        ; time (s) ; #Gops ; Gflops; speedup
+    Python ; 05000x00001 ; 122.24 ; 50;         0.41; 1
+-->java MatrixMultiply 5000 1 0.41
+Version    ; size       ; time (s) ; #Gops ; Gflops; speedup
+      Java ; 05000x00001 ;  0.64 ; 50  ;        77.90 ;       190.00
+Dummy result : 0.357279?
+-->./MatrixMultiply 5000 1 0.41
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+         C ; 05000x00001 ;  0.20; 50  ; 252.90;   inf
+Dummy result : 3569.000000̣
+-->./MatrixMultiplyThreadParallel 5000 1 4 0.41
+Version    ; size       ; time (s) ; #Gops ; flops; speedup
+ C pthread ; 05000x00001 ; 0.94; 50; 53.02;  inf
+Thread N 4 Dummy result : 3569.000000̣
