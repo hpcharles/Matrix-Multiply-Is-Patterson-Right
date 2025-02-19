@@ -48,34 +48,35 @@ if __name__ == "__main__":
     (numberOfLines, numberOfColumns) = dataSize[a.matrixName[0]]
     checkBinary("gcc", "javac", "java")
     processorNumber = str(multiprocessing.cpu_count())
-
+    cacheLineSize = doCmd (["getconf", "LEVEL1_DCACHE_LINESIZE"]).strip("\n")
+    print ("proc count !%s!, dcacheLine !%s!"%(processorNumber, cacheLineSize))
     cCompilation = ["gcc", "-O3", "-Wall", "-Werror", ]
     toBuild = { "clean":   ["rm", "-f", "MatrixMultiply", "MatrixMultiply.class", "MatrixMultiplyThreadParallel"],
                 "buildC": cCompilation + ["-o", "MatrixMultiply", "MatrixMultiply.c", "MatrixUtils.c"],
                 "buildCParallel": cCompilation + ["-o", "MatrixMultiplyThreadParallel", "MatrixMultiplyThreadParallel.c", "MatrixUtils.c"],
+                "buildCParallelTiled": cCompilation + ["-o", "MatrixMultiplyThreadParallelTiled", "MatrixMultiplyThreadParallelTiled.c", "MatrixUtils.c"],
                 "buildJava": ["javac", "MatrixMultiply.java"],}
 
     toRun = {
-        "python": ["./MatrixMultiply.py", "--numberOfLines", numberOfLines, "--numberOfColumns", numberOfColumns, "--dataType", a.dataType[0]],
-        "java":   ["java", "MatrixMultiply", numberOfLines, numberOfColumns],
-        "c":      ["./MatrixMultiply", numberOfLines, numberOfColumns],
-        "cparallel": ["./MatrixMultiplyThreadParallel", numberOfLines, numberOfColumns, processorNumber],
+        "python":        ["./MatrixMultiply.py", "--numberOfLines", numberOfLines, "--numberOfColumns", numberOfColumns, "--dataType", a.dataType[0]],
+        "java":          ["java", "MatrixMultiply",             numberOfLines, numberOfColumns],
+        "c":             ["./MatrixMultiply",                   numberOfLines, numberOfColumns],
+        "cParallel":     ["./MatrixMultiplyThreadParallel",     numberOfLines, numberOfColumns, processorNumber],
+        "cParallelTiled":["./MatrixMultiplyThreadParallelTiled",numberOfLines, numberOfColumns, processorNumber, cacheLineSize],
     }
     # Make clean & build binaries
-    r = doCmd(toBuild["clean"], a.verbose)
-    r = doCmd(toBuild["buildC"], a.verbose)
-    r = doCmd(toBuild["buildCParallel"], a.verbose)
-    r = doCmd(toBuild["buildJava"], a.verbose)
-
+    r = doCmd(toBuild["clean"], 	a.verbose)
+    r = doCmd(toBuild["buildC"], 	a.verbose)
+    r = doCmd(toBuild["buildCParallel"],a.verbose)
+    r = doCmd(toBuild["buildCParallelTiled"], a.verbose)
+    r = doCmd(toBuild["buildJava"], 	a.verbose)
     # Run experiments
     r = doCmd(toRun["python"], a.verbose)
     print (r, end="")
     r = r.split ("\n")[1] # 2nd result line
-    reference = r.split(";")[4] # 5th element
+    reference = r.split(";")[4] # 5th element (get time reference)
     reference = reference.split()[0]
-    r = doCmd(toRun["java"]+[reference], a.verbose)
-    print (r, end="")
-    r = doCmd(toRun["c"]+[reference], a.verbose)
-    print (r, end="")
-    r = doCmd(toRun["cparallel"]+[reference], a.verbose)
-    print (r, end="")
+    for codeVersion in ["java", "c", "cParallel", "cParallelTiled"]:
+        r = doCmd(toRun[codeVersion]+[reference], a.verbose)
+        print (r, end="")
+    print()

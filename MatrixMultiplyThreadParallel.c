@@ -6,7 +6,6 @@
 tMatrix a, b;	/* Input matrices */
 tMatrix c;		/* Result matrice */
 
-#define NTHREAD 6
 
 typedef struct
 {
@@ -15,9 +14,9 @@ typedef struct
   int line, NLines, NColumns;
 } tStructArg;
 
-tStructArg arrayStructArg[NTHREAD];
-pthread_t threadPointer[NTHREAD];
-
+tStructArg *arrayStructArg;
+pthread_t * threadPointer;
+long nThread;
 void mulMatrixKernel(tMatrix a, tMatrix b, tMatrix res, int line, int NLines, int NColumns)
 {
   int col, k;
@@ -55,9 +54,9 @@ void mulMatrix(tMatrix a, tMatrix b, tMatrix res, int NLines, int NColumns)
 {
   int line, threadN, ret;
 
-  for (line = 0; line < NLines; line+= NTHREAD)
+  for (line = 0; line < NLines; line+= nThread)
 	{
-	  for (threadN = 0; threadN < NTHREAD; threadN++)
+	  for (threadN = 0; threadN < nThread; threadN++)
 		{
 		  //  mulMatrixKernel (a, b, res, line, NLines, NColumns);
 		  copyParam(a, b, res, NLines, NColumns, threadN);
@@ -68,7 +67,7 @@ void mulMatrix(tMatrix a, tMatrix b, tMatrix res, int NLines, int NColumns)
 			  exit(-1);
 			}
 		}
-	  for (threadN = 0; threadN < NTHREAD; threadN++)
+	  for (threadN = 0; threadN < nThread; threadN++)
 		{
 		  pthread_join(threadPointer[threadN], NULL);
 		}
@@ -77,13 +76,13 @@ void mulMatrix(tMatrix a, tMatrix b, tMatrix res, int NLines, int NColumns)
 
 int main(int argc, char * argv[])
 {
-  long nColumns, nLines, nThread, reference;
+  long nColumns, nLines, reference;
   long long startTime, endTime, nOps;
   float duration, flops, speedup;
 
   if (argc < 5)
 	{
-	  printf("Not enough arguments <nLines> <nColumns> <referenceTime> <#treadNumber>\n");
+	  printf("Not enough arguments <nLines> <nColumns> <#treadNumber> <referenceTime> \n");
 	  return 0;
 	}
   nLines     = atoi(argv[1]);
@@ -91,11 +90,15 @@ int main(int argc, char * argv[])
   nThread    = atoi(argv[3]);
   reference  = atoi(argv[4]);
 
-  a = createMatrix(nLines, nColumns);
+  a = createMatrix(nLines, nColumns); // Alloc & initialize matrices LxC and CxL
   randMatrix   (a, nLines, nColumns);
   b = createMatrix(nColumns, nLines);
   randMatrix   (b, nColumns, nLines);
   c = createMatrix(nLines, nLines);
+
+  arrayStructArg = (tStructArg *) malloc (nThread*sizeof (tStructArg));
+  threadPointer  = (pthread_t *)  malloc (nThread*sizeof (pthread_t));
+
   startTime = getTime();
   mulMatrix(a, b, c, nLines, nColumns);
   endTime = getTime();
